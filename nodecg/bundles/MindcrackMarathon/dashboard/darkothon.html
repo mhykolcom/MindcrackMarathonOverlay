@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela Round">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .monospace {
+            font-family: monospace;
+        }
+        
+        body {
+            font-size: 1rem;
+            --text-opacity: 1;
+            color: #ccbf00;
+            color: rgba(236, 191, 0, var(--text-opacity));
+            font-weight: 600;
+            font-family: "Varela Round";
+            background-color: rgb(0, 80, 146);
+            margin: 8px 0;
+        }
+        
+        .form-row~.form-row {
+            margin-top: 8px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let subRep = nodecg.Replicant('subRep', {
+            defaultValue: 0
+        });
+        let bitRep = nodecg.Replicant('bitRep', {
+            defaultValue: 0
+        });
+        let tipRep = nodecg.Replicant('tipRep', {
+            defaultValue: 0
+        });
+        let goalRep = nodecg.Replicant('goalRep');
+        let styleRep = nodecg.Replicant('styleRep');
+        let countdownRep = nodecg.Replicant('countdown');
+        let formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        });
+        let countdown = {}
+        let replicants = {}
+
+        subRep.on('change', (newValue, oldValue) => {
+            $('#subcount').val(newValue);
+        });
+
+        bitRep.on('change', (newValue, oldValue) => {
+            $('#bitcount').val(newValue);
+        });
+
+        tipRep.on('change', (newValue, oldValue) => {
+            $('#tipcount').val(newValue);
+        });
+
+        goalRep.on('change', (newValue, oldValue) => {
+            $('#goalTitle').val(newValue.goalTitle);
+            $('#goalText').val(newValue.goalText);
+            $('#goalAmount').val(newValue.goalAmount);
+        });
+
+        styleRep.on('change', (newValue, oldValue) => {
+            $('#styleSize').val(newValue.size);
+            $('#styleOpacity').val(newValue.opacity);
+            $('#styleColorR').val(newValue.colorR);
+            $('#styleColorG').val(newValue.colorG);
+            $('#styleColorB').val(newValue.colorB);
+        });
+
+        function update(replicant, value) {
+            replicant.value = parseFloat(value);
+        }
+
+        countdownRep.on('change', (newDateTime, oldValue) => {
+            countdown = {
+                'date': $('#countdownDate'),
+                'time': $('#countdownTime')
+            }
+            countdown.date.val((newDateTime === undefined || !newDateTime) ? '' : (newDateTime.date || ''));
+            countdown.time.val((newDateTime === undefined || !newDateTime) ? '' : (newDateTime.time || ''));
+        });
+
+        function saveData() {
+            countdown = {
+                'date': $('#countdownDate'),
+                'time': $('#countdownTime')
+            }
+            countdownRep.value = {
+                'date': countdown.date.val(),
+                'time': countdown.time.val()
+            };
+        }
+
+        function saveGoal() {
+            goal = {
+                'goalTitle': $('#goalTitle'),
+                'goalText': $('#goalText'),
+                'goalAmount': $('#goalAmount'),
+            }
+            goalRep.value = {
+                'goalTitle': goal.goalTitle.val(),
+                'goalText': goal.goalText.val(),
+                'goalAmount': goal.goalAmount.val()
+            }
+        }
+
+        $(document).on('click', '#stats button', function(e) {
+            let $this = $(e.target);
+            let target = $this.parent().attr('data-target');
+            let type = $this.attr('data-type');
+            let replicant;
+
+            switch (target) {
+                case "bits":
+                    replicant = bitRep;
+                    break;
+                case "tips":
+                    replicant = tipRep;
+                    break;
+                case "subs":
+                    replicant = subRep;
+                    break;
+                case "count":
+                    break;
+            }
+            if (type == "reset") update(replicant, 0)
+            else if (type == "calupdate") saveData();
+            else if (type == "goalupdate") saveGoal();
+            else update(replicant, $this.parent().parent().find('input').val())
+            return false;
+        });
+        $(document).on('change', '#styleSize,#styleOpacity,#styleColorR,#styleColorG,#styleColorB', () => {
+            styleRep.value = {
+                'size': $('#styleSize').val(),
+                'opacity': $('#styleOpacity').val(),
+                'colorR': $('#styleColorR').val(),
+                'colorG': $('#styleColorG').val(),
+                'colorB': $('#styleColorB').val()
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="stats" class="container">
+        <div class="form-row">
+            <div class="input-group" id="#goal" data-target="goal">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Goal Title</span>
+                </div>
+                <input type="text" class="form-control" id="goalTitle">
+                <div class="input-group-append">
+                    <button data-type="goalupdate" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group" id="#goal2" data-target="goal">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Goal Amount</span>
+                </div>
+                <input type="text" class="form-control" id="goalAmount">
+                <div class="input-group-append">
+                    <span class="input-group-text">Sub Points</span>
+                </div>
+                <div class="input-group-append">
+                    <button data-type="goalupdate" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group" id="#goal3" data-target="goal">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Goal Text</span>
+                </div>
+                <input type="text" class="form-control" id="goalText">
+                <div class="input-group-append">
+                    <button data-type="goalupdate" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="tiptext">Tips</span>
+                </div>
+                <input id="tipcount" type="text" class="form-control">
+                <div class="input-group-append" id="#tips" data-target="tips">
+                    <button data-type="update" class="btn btn-primary">Update</button>
+                    <button data-type="reset" class="btn btn-warning">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="bittext">Bits</span>
+                </div>
+                <input id="bitcount" type="text" class="form-control">
+                <div class="input-group-append" id="#bits" data-target="bits">
+                    <button data-type="update" class="btn btn-primary">Update</button>
+                    <button data-type="reset" class="btn btn-warning">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="subtext">Subs</span>
+                </div>
+                <input id="subcount" type="text" class="form-control">
+                <div class="input-group-append" id="#subs" data-target="subs">
+                    <button data-type="update" class="btn btn-primary">Update</button>
+                    <button data-type="reset" class="btn btn-warning">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group" id="#goal" data-target="goal">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Date</span>
+                </div>
+                <input class="form-control" id="countdownDate" type="date" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Time</span>
+                </div>
+                <input class="form-control" id="countdownTime" type="time" />
+                <div class="input-group-append">
+                    <button data-type="calupdate" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group" id="#style" data-target="style">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Font Size</span>
+                </div>
+                <input class="form-control" id="styleSize" type="number" min=".5" max="2.5" step=".1" />
+                <div class="input-group-append">
+                    <span class="input-group-text">em</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group" id="#style" data-target="style">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">BG</span>
+                    <span class="input-group-text">R</span>
+                </div>
+                <input class="form-control" id="styleColorR" type="number" min="0" max="255" step="1" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">G</span>
+                </div>
+                <input class="form-control" id="styleColorG" type="number" min="0" max="255" step="1" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">B</span>
+                </div>
+                <input class="form-control" id="styleColorB" type="number" min="0" max="255" step="1" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">A</span>
+                </div>
+                <input class="form-control" id="styleOpacity" type="number" min="0" max="1" step=".01" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

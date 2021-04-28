@@ -1,0 +1,64 @@
+{
+  "name": "MindcrackMarathon",
+  "version": "0.0.0",
+  "description": "Mindcrack Marathon",
+  "homepage": "",
+  "author": {
+    "name": "Mhykol",
+    "email": "mhykol@gmail.com",
+    "url": "https://mhykol.com"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension",
+    "node_modules"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "bundleDependencies": {
+      "nodecg-streamlabs": "0.1.4"
+    },
+    "dashboardPanels": [
+      {
+        "name": "darkothon",
+        "title": "Darkothon",
+        "width": 4,
+        "file": "darkothon.html",
+        "headerColor": "#00ccff"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "bitcount.html",
+        "width": 300,
+        "height": 20
+      },
+      {
+        "file": "subcount.html",
+        "width": 300,
+        "height": 20
+      },
+      {
+        "file": "tipcount.html",
+        "width": 300,
+        "height": 20
+      },
+      {
+        "file": "stackedcount.html",
+        "width": 300,
+        "height": 100
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "MIT",
+  "dependencies": {
+    "flatpickr": "^4.6.6"
+  }
+}
