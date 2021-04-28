@@ -1,5 +1,5 @@
 {
-  "name": "schedule",
+  "name": "image_swap",
   "version": "0.0.1",
   "description": "",
   "homepage": "",
@@ -15,7 +15,7 @@
     "extension"
   ],
   "keywords": [
-    "schedule",
+    "image-swap",
     "mindcrack",
     "nodecg-bundle"
   ],
@@ -23,23 +23,18 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "schedule",
-        "title": "Schedule",
-        "width": 4,
-        "file": "schedule.html",
+        "name": "image-swap",
+        "title": "Image Swapper",
+        "width": 2,
+        "file": "image_swap.html",
         "headerColor": "#3DB329"
       }
     ],
     "graphics": [
       {
-        "file": "simple.html",
-        "width": 1920,
-        "height": 200
-      },
-      {
-        "file": "fancy.html",
-        "width": 1920,
-        "height": 300
+        "file": "index.html",
+        "width": 1280,
+        "height": 720
       }
     ]
   },

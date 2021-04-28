@@ -1,19 +1,18 @@
 {
-  "name": "MindcrackMarathon",
+  "name": "mindcrackmarathon",
   "version": "0.0.0",
   "description": "Mindcrack Marathon",
   "homepage": "",
   "author": {
     "name": "Mhykol",
     "email": "mhykol@gmail.com",
-    "url": "https://mhykol.com"
+    "url": "https://mindcrackmarathon.com"
   },
   "files": [
     "dashboard",
     "graphics",
     "extension.js",
-    "extension",
-    "node_modules"
+    "extension"
   ],
   "keywords": [
     "",
@@ -21,44 +20,60 @@
   ],
   "nodecg": {
     "compatibleRange": "^1.1.1",
-    "bundleDependencies": {
-      "nodecg-streamlabs": "0.1.4"
-    },
     "dashboardPanels": [
       {
-        "name": "darkothon",
-        "title": "Darkothon",
-        "width": 4,
-        "file": "darkothon.html",
-        "headerColor": "#00ccff"
+        "name": "info",
+        "title": "Info",
+        "width": 3,
+        "file": "info.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "timer",
+        "title": "Timer",
+        "width": 3,
+        "file": "timer.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "twitter",
+        "title": "Twitter",
+        "width": 3,
+        "file": "twitter.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "keys",
+        "title": "Keys",
+        "width": 3,
+        "file": "keys.html",
+        "headerColor": "#525F78",
+        "workspace": "Admin"
+      },
+      {
+        "name": "countdown",
+        "title": "Countdown",
+        "width": 3,
+        "file": "countdown.html",
+        "headerColor": "#525F78",
+        "workspace": "Admin"
+      },
+      {
+        "name": "names",
+        "title": "Speaker Names",
+        "width": 3,
+        "file": "names.html",
+        "headerColor": "#525F78"
       }
     ],
     "graphics": [
       {
-        "file": "bitcount.html",
-        "width": 300,
-        "height": 20
-      },
-      {
-        "file": "subcount.html",
-        "width": 300,
-        "height": 20
-      },
-      {
-        "file": "tipcount.html",
-        "width": 300,
-        "height": 20
-      },
-      {
-        "file": "stackedcount.html",
-        "width": 300,
-        "height": 100
+        "file": "index.html",
+        "width": 1280,
+        "height": 720
       }
     ]
   },
-  "repository": "https://github.com/nodecg/nodecg.git",
-  "license": "MIT",
-  "dependencies": {
-    "flatpickr": "^4.6.6"
-  }
+  "repository": "https://github.com/mhykolcom/MindcrackMarathonOverlay.git",
+  "license": "GPL-3.0"
 }
