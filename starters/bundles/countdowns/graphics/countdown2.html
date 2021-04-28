@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="common.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="countdown"></div>
+
+<script src="/bundles/utility/js/utilities.js"></script>
+<script src="common.js"></script>
+<script>
+	nodecg.Replicant('countdown2').on('change', (newDatetime, oldValue) => {
+		prepChanges(newDatetime);
+	});
+</script>
+</body>
+</html>

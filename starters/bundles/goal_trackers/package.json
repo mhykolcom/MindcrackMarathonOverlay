@@ -1,0 +1,63 @@
+{
+  "name": "goal_trackers",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@awesome-penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "goal",
+    "goal-tracker",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "goal-trackers",
+        "title": "Goal Trackers",
+        "width": 6,
+        "file": "goal_trackers.html",
+        "headerColor": "#e0a800"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "goal_bar_1.html",
+        "width": 1200,
+        "height": 150
+      },
+      {
+        "file": "goal_bar_2.html",
+        "width": 1200,
+        "height": 150
+      },
+      {
+        "file": "goal_bar_3.html",
+        "width": 1200,
+        "height": 150
+      },
+      {
+        "file": "goal_bar_4.html",
+        "width": 1200,
+        "height": 150
+      },
+      {
+        "file": "goal_bar_5.html",
+        "width": 1200,
+        "height": 150
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}

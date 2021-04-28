@@ -1,0 +1,63 @@
+{
+  "name": "lower_thirds",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@awesome-penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "talking_heads",
+    "nodecg-bundle",
+    "interview",
+    "lower-thirds"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "talking_heads",
+        "title": "Talking Name Cards",
+        "width": 6,
+        "file": "name_cards.html",
+        "headerColor": "#e07514"
+      },
+      {
+        "name": "lower_thirds",
+        "title": "Generic Lower-Thirds",
+        "width": 8,
+        "file": "lower_thirds.html",
+        "headerColor": "#e07514"
+      },
+      {
+        "name": "social_media",
+        "title": "Social Media Placards",
+        "width": 5,
+        "file": "social_media.html",
+        "headerColor": "#e07514"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "talking_heads.html",
+        "width": 1920,
+        "height": 360
+      },
+      {
+        "file": "social_media.html",
+        "width": 1920,
+        "height": 450
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}

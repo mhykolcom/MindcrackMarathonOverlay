@@ -1,0 +1,43 @@
+{
+  "name": "penguin",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@awesome-penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "test",
+    "mindcrack",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "penguin-panel",
+        "title": "Penguin Panel",
+        "width": 2,
+        "file": "penguin-panel.html",
+        "headerColor": "#3DB329"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1280,
+        "height": 720
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}

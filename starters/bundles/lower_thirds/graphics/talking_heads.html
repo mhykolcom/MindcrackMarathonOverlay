@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--<link href="common.css" rel="stylesheet" type="text/css"/>-->
+	<script src="https://kit.fontawesome.com/7f875991c8.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        #placards {
+            display: flex;
+            justify-content: space-between;
+            height: 150px;
+            opacity: 1;
+            position: relative;
+            top: 0;
+        }
+
+        #placards.loading {
+            transition: none !important;
+            opacity: 0 !important;
+        }
+
+        #placards.hidden {
+            opacity: 0;
+            top: 100%;
+            transition: opacity .75s ease-out, top 2s ease-out;
+        }
+
+        #placards.shown {
+            opacity: 1;
+            top: 0;
+            transition: opacity .75s ease-in .75s, top 1.5s ease-in;
+        }
+
+        .placard {
+            /* border: 1px solid red; */
+            font-size: 1em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            height: 134px;
+            width: 550px;
+            padding: 0 20px;
+            transition: top .75s ease, left .75s ease, right .75s ease, bottom .75s ease;
+            position: relative;
+            bottom: 0;
+            background-size: 550px 134px;
+            background-repeat: no-repeat;
+            background-position: 20px 0;
+        }
+
+        .placard.discord {
+            background-image: url('placard_backgrounds/discord.png');
+        }
+
+        .placard.twitter {
+            background-image: url('placard_backgrounds/twitter.png');
+        }
+
+        .placard.twitch {
+            background-image: url('placard_backgrounds/twitch.png');
+        }
+
+        .placard.youtube {
+            background-image: url('placard_backgrounds/youtube.png');
+        }
+
+        .placard.instagram {
+            background-image: url('placard_backgrounds/instagram.png');
+        }
+
+        .placard.facebook {
+            background-image: url('placard_backgrounds/facebook.png');
+        }
+
+        .placard.snapchat {
+            background-image: url('placard_backgrounds/snapchat.png');
+        }
+
+        .placard.email {
+            background-image: url('placard_backgrounds/generic.png');
+        }
+
+        .placard.generic {
+            background-image: url('placard_backgrounds/generic.png');
+        }
+
+        .placard_box {
+            position: relative;
+            height: 134px;
+            width: 550px;
+        }
+
+        .single .placard {
+        }
+
+        .duo .placard {
+        }
+
+        .trio .placard {
+        }
+
+        .left {
+        }
+
+        .right {
+        }
+
+        .middle {
+        }
+
+        .name, .contact, .icon_container {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /*Some Name of Person On*/
+        .name {
+            font-size: 2.5em;
+            top: 64px;
+            left: 130px;
+            width: 420px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .contact {
+            top: 16px;
+            left: 120px;
+            font-size: 1.2em;
+            width: 204px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .icon_container {
+            top: 35px;
+            left: 35px;
+        }
+
+        .icon {
+            width: 4.2em;
+            height: 4.2em;
+        }
+    </style>
+</head>
+<body>
+<div id="placards" class="hidden loading">
+</div>
+
+<i data-fa-symbol="discord_icon" class="fab fa-discord"></i>
+<i data-fa-symbol="twitter_icon" class="fab fa-twitter"></i>
+<i data-fa-symbol="twitch_icon" class="fab fa-twitch"></i>
+<i data-fa-symbol="youtube_icon" class="fab fa-youtube"></i>
+<i data-fa-symbol="instagram_icon" class="fab fa-instagram"></i>
+<i data-fa-symbol="facebook_icon" class="fab fa-facebook"></i>
+<i data-fa-symbol="snapchat_icon" class="fab fa-snapchat"></i>
+<i data-fa-symbol="email_icon" class="far fa-envelope"></i>
+<i data-fa-symbol="generic_icon" class="far fa-comment-alt-smile"></i>
+
+<template id="template">
+	<div class="placard">
+		<div class="placard_box">
+			<div class="icon_container">
+				<svg class="icon">
+					<use xlink:href="#nothing_icon"></use>
+				</svg>
+			</div>
+			<div class="name"></div>
+			<div class="contact"></div>
+		</div>
+	</div>
+</template>
+
+<script src="/bundles/utility/js/utilities.js"></script>
+<script>
+	let loaded = false;
+	const ACTION_HIDE = 'hide';
+	const ACTION_SHOW = 'show';
+	const ACTION_FLASH = 'flash';
+
+	const template = document.querySelector('#template');
+	const placardContainer = document.querySelector('#placards');
+
+	let lastTarget = null;
+	let flashTimeout = 0;
+	let names = {
+		'left': {},
+		'middle': {},
+		'right': {}
+	}
+
+	nodecg.Replicant('name_cards').on('change', (newValue, oldValue) => {
+		let left = newValue.left;
+		let middle = newValue.middle;
+		let right = newValue.right;
+
+		names.left = prepSet(left);
+		names.middle = prepSet(middle);
+		names.right = prepSet(right);
+
+		if (!loaded) {
+			placardContainer.classList.remove('loading')
+			loaded = true;
+		}
+	});
+
+	function prepSet(values) {
+		return checkName(values) ? formatData(values) : null;
+	}
+	function checkName(values) {
+		return ('' + values.name).trim().length > 0;
+	}
+	function formatData(values) {
+		return {
+			'name': values.name,
+			'contact': values.contact,
+			'type': values.type
+		}
+	}
+
+	function doNameControl(data) {
+		// console.log('name control: ', data)
+		if (!data.action) return logError('Requested name control, but no action was specified', data);
+		if (![ACTION_HIDE, ACTION_SHOW, ACTION_FLASH].includes(data.action)) return logError('Unknown action', data)
+
+		let action = data.action;
+		let target = data.target || null;
+		let checksum = makeChecksum();
+		let currentChecksum = getChecksum();
+
+		if (
+			placardContainer.classList.contains('shown')
+			&& [ACTION_SHOW, ACTION_FLASH].includes(action)
+			&& currentChecksum === checksum
+			&& target === lastTarget
+		) {
+			return checkFlash(data);
+		}
+
+		// Hide before modifying
+		hidePlacards();
+		if (flashTimeout > 0) clearTimeout(flashTimeout)
+		let timeoutTime = (placardContainer.textContent.length > 0)? 1000 : 50;
+
+		setTimeout(()=> {
+			placardContainer.textContent = '';
+			if (action === ACTION_HIDE) return;
+
+			if (target) {
+				placardContainer.classList.add('single')
+				placardContainer.classList.remove('duo')
+				placardContainer.classList.remove('trio')
+				createPlacard(names[target], 'left')
+			} else {
+				// Make adjustments
+				if (names.middle) {
+					placardContainer.classList.remove('single')
+					placardContainer.classList.remove('duo')
+					placardContainer.classList.add('trio')
+					createPlacard(names.left, 'left')
+					createPlacard(names.middle, 'middle')
+					createPlacard(names.right, 'right')
+				} else if (names.right) {
+					placardContainer.classList.remove('single')
+					placardContainer.classList.add('duo')
+					placardContainer.classList.remove('trio')
+					createPlacard(names.left, 'left')
+					createPlacard(names.right, 'right')
+				} else {
+					placardContainer.classList.add('single')
+					placardContainer.classList.remove('duo')
+					placardContainer.classList.remove('trio')
+					createPlacard(names.left, 'left')
+				}
+			}
+
+			setChecksum(checksum);
+			lastTarget = target
+
+			setTimeout(()=> {
+				// Show again
+				showPlacards();
+				checkFlash(data);
+			}, 100);
+		}, timeoutTime);
+	}
+
+	nodecg.listenFor('nameControl', doNameControl)
+
+	function logError(message, data) {
+		nodecg.log.error(message, data);
+		console.error(message, data);
+		return null;
+	}
+
+	function createPlacard(data, style) {
+		template.content.querySelector('.name').textContent = data.name;
+		template.content.querySelector('.contact').textContent = data.contact;
+		let icon = template.content.querySelector('.icon use')
+		icon.setAttribute('xlink:href',`#${data.type}_icon`);
+		icon.setAttribute('href',`#${data.type}_icon`);
+
+		let clone = document.importNode(template.content, true);
+		clone.querySelector('.placard').classList.add(data.type);
+		clone.querySelector('.placard').classList.add(style);
+		placardContainer.appendChild(clone)
+	}
+
+	function hidePlacards() {
+		placardContainer.classList.add('hidden');
+		placardContainer.classList.remove('shown');
+	}
+
+	function showPlacards() {
+		placardContainer.classList.add('shown');
+		placardContainer.classList.remove('hidden');
+	}
+
+	function checkFlash(data) {
+		if (data.action === ACTION_FLASH && data.time) {
+			flashTimeout = setTimeout(() => {
+				hidePlacards();
+				flashTimeout = 0;
+			}, parseInt(data.time) * 1000);
+		}
+	}
+
+	function makeChecksum() {
+		return MD5(JSON.stringify(names, function (k, v) {
+			if (k[0] === "_") return undefined; // remove api stuff
+			else if (typeof v === "function") // consider functions
+				return v.toString();
+			else return v;
+		}));
+	}
+
+	function getChecksum() {
+		return placardContainer.getAttribute('data-hash');
+	}
+
+	function setChecksum(checksum) {
+		placardContainer.setAttribute('data-hash', checksum);
+	}
+
+</script>
+</body>
+</html>

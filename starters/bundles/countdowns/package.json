@@ -1,0 +1,62 @@
+{
+  "name": "countdowns",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@awesome-penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "countdown",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "countdowns",
+        "title": "Countdowns",
+        "width": 4,
+        "file": "countdowns.html",
+        "headerColor": "#43DBFF"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "countdown1.html",
+        "width": 1200,
+        "height": 120
+      },
+      {
+        "file": "countdown2.html",
+        "width": 1200,
+        "height": 120
+      },
+      {
+        "file": "countdown3.html",
+        "width": 1200,
+        "height": 120
+      },
+      {
+        "file": "countdown4.html",
+        "width": 1200,
+        "height": 120
+      },
+      {
+        "file": "countdown5.html",
+        "width": 1200,
+        "height": 120
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}

@@ -1,0 +1,48 @@
+{
+  "name": "schedule",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@awesome-penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "schedule",
+    "mindcrack",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "schedule",
+        "title": "Schedule",
+        "width": 4,
+        "file": "schedule.html",
+        "headerColor": "#3DB329"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "simple.html",
+        "width": 1920,
+        "height": 200
+      },
+      {
+        "file": "fancy.html",
+        "width": 1920,
+        "height": 300
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}
