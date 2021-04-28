@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">-->
+<!--	<link rel="stylesheet" href="" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="h3">Toggle Countdowns</div>
+			<div class="row">
+				<button data-toggle="collapse" data-target="#countdown1" class="ml-1 mr-1 col btn btn-primary" aria-expanded="true">1</button>
+				<button data-toggle="collapse" data-target="#countdown2" class="ml-1 mr-1 col btn btn-warning collapsed" aria-expanded="false">2</button>
+				<button data-toggle="collapse" data-target="#countdown3" class="ml-1 mr-1 col btn btn-light collapsed" aria-expanded="false">3</button>
+				<button data-toggle="collapse" data-target="#countdown4" class="ml-1 mr-1 col btn btn-danger collapsed" aria-expanded="false">4</button>
+				<button data-toggle="collapse" data-target="#countdown5" class="ml-1 mr-1 col btn btn-success collapsed" aria-expanded="false">5</button>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-5">
+	<fieldset id="countdown1" class="border border-primary col-lg-4 col-md-6 collapse show">
+		<legend class="text-primary">Countdown 1</legend>
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown1Date">Date:</label>
+				<input class="form-control" id="countdown1Date" type="date"/>
+			</div>
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown1Time">Time:</label>
+				<input class="form-control" id="countdown1Time" type="time"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown1PreText">Pre Text:</label>
+				<input class="form-control" id="countdown1PreText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown1PostText">Post Text:</label>
+				<input class="form-control" id="countdown1PostText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown1FinishedText">On Completion:</label>
+				<input class="form-control" id="countdown1FinishedText" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<!-- {pre} {datetime} {post} -->
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown1Format">Display Format:</label>
+				<input class="form-control" id="countdown1Format" type="text"/>
+			</div>
+			<!-- # days and, -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown1FormatDays">Days:</label>
+				<input class="form-control" id="countdown1FormatDays" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown1FormatHours">Hours:</label>
+				<input class="form-control" id="countdown1FormatHours" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown1FormatMins">Minutes:</label>
+				<input class="form-control" id="countdown1FormatMins" type="text"/>
+			</div>
+			<!-- # -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown1FormatSecs">Seconds:</label>
+				<input class="form-control" id="countdown1FormatSecs" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-5">
+				<label class="col-form-label" for="countdown1BackgroundColor">BG Color:</label>
+				<input class="form-control" id="countdown1BackgroundColor" type="text"/>
+			</div>
+			<div class="form-group col-4">
+				<label class="col-form-label" for="countdown1TextColor">Text Color:</label>
+				<input class="form-control" id="countdown1TextColor" type="text"/>
+			</div>
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown1TextSize">Text Size:</label>
+				<input class="form-control" id="countdown1TextSize" type="text"/>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="countdown2" class="border border-warning col-lg-4 col-md-6 collapse">
+		<legend class="text-warning">Countdown 2</legend>
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown2Date">Date:</label>
+				<input class="form-control" id="countdown2Date" type="date"/>
+			</div>
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown2Time">Time:</label>
+				<input class="form-control" id="countdown2Time" type="time"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown2PreText">Pre Text:</label>
+				<input class="form-control" id="countdown2PreText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown2PostText">Post Text:</label>
+				<input class="form-control" id="countdown2PostText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown2FinishedText">On Completion:</label>
+				<input class="form-control" id="countdown2FinishedText" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<!-- {pre} {datetime} {post} -->
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown2Format">Display Format:</label>
+				<input class="form-control" id="countdown2Format" type="text"/>
+			</div>
+			<!-- # days and, -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown2FormatDays">Days:</label>
+				<input class="form-control" id="countdown2FormatDays" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown2FormatHours">Hours:</label>
+				<input class="form-control" id="countdown2FormatHours" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown2FormatMins">Minutes:</label>
+				<input class="form-control" id="countdown2FormatMins" type="text"/>
+			</div>
+			<!-- # -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown2FormatSecs">Seconds:</label>
+				<input class="form-control" id="countdown2FormatSecs" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-5">
+				<label class="col-form-label" for="countdown2BackgroundColor">BG Color:</label>
+				<input class="form-control" id="countdown2BackgroundColor" type="text"/>
+			</div>
+			<div class="form-group col-4">
+				<label class="col-form-label" for="countdown2TextColor">Text Color:</label>
+				<input class="form-control" id="countdown2TextColor" type="text"/>
+			</div>
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown2TextSize">Text Size:</label>
+				<input class="form-control" id="countdown2TextSize" type="text"/>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="countdown3" class="border border-light col-lg-4 col-md-6 collapse">
+		<legend class="text-light">Countdown 3</legend>
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown3Date">Date:</label>
+				<input class="form-control" id="countdown3Date" type="date"/>
+			</div>
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown3Time">Time:</label>
+				<input class="form-control" id="countdown3Time" type="time"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown3PreText">Pre Text:</label>
+				<input class="form-control" id="countdown3PreText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown3PostText">Post Text:</label>
+				<input class="form-control" id="countdown3PostText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown3FinishedText">On Completion:</label>
+				<input class="form-control" id="countdown3FinishedText" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<!-- {pre} {datetime} {post} -->
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown3Format">Display Format:</label>
+				<input class="form-control" id="countdown3Format" type="text"/>
+			</div>
+			<!-- # days and, -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown3FormatDays">Days:</label>
+				<input class="form-control" id="countdown3FormatDays" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown3FormatHours">Hours:</label>
+				<input class="form-control" id="countdown3FormatHours" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown3FormatMins">Minutes:</label>
+				<input class="form-control" id="countdown3FormatMins" type="text"/>
+			</div>
+			<!-- # -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown3FormatSecs">Seconds:</label>
+				<input class="form-control" id="countdown3FormatSecs" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-5">
+				<label class="col-form-label" for="countdown3BackgroundColor">BG Color:</label>
+				<input class="form-control" id="countdown3BackgroundColor" type="text"/>
+			</div>
+			<div class="form-group col-4">
+				<label class="col-form-label" for="countdown3TextColor">Text Color:</label>
+				<input class="form-control" id="countdown3TextColor" type="text"/>
+			</div>
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown3TextSize">Text Size:</label>
+				<input class="form-control" id="countdown3TextSize" type="text"/>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="countdown4" class="border border-danger col-lg-4 col-md-6 collapse">
+		<legend class="text-danger">Countdown 4</legend>
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown4Date">Date:</label>
+				<input class="form-control" id="countdown4Date" type="date"/>
+			</div>
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown4Time">Time:</label>
+				<input class="form-control" id="countdown4Time" type="time"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown4PreText">Pre Text:</label>
+				<input class="form-control" id="countdown4PreText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown4PostText">Post Text:</label>
+				<input class="form-control" id="countdown4PostText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown4FinishedText">On Completion:</label>
+				<input class="form-control" id="countdown4FinishedText" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<!-- {pre} {datetime} {post} -->
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown4Format">Display Format:</label>
+				<input class="form-control" id="countdown4Format" type="text"/>
+			</div>
+			<!-- # days and, -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown4FormatDays">Days:</label>
+				<input class="form-control" id="countdown4FormatDays" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown4FormatHours">Hours:</label>
+				<input class="form-control" id="countdown4FormatHours" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown4FormatMins">Minutes:</label>
+				<input class="form-control" id="countdown4FormatMins" type="text"/>
+			</div>
+			<!-- # -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown4FormatSecs">Seconds:</label>
+				<input class="form-control" id="countdown4FormatSecs" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-5">
+				<label class="col-form-label" for="countdown4BackgroundColor">BG Color:</label>
+				<input class="form-control" id="countdown4BackgroundColor" type="text"/>
+			</div>
+			<div class="form-group col-4">
+				<label class="col-form-label" for="countdown4TextColor">Text Color:</label>
+				<input class="form-control" id="countdown4TextColor" type="text"/>
+			</div>
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown4TextSize">Text Size:</label>
+				<input class="form-control" id="countdown4TextSize" type="text"/>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="countdown5" class="border border-success col-lg-4 col-md-6 collapse">
+		<legend class="text-success">Countdown 5</legend>
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown5Date">Date:</label>
+				<input class="form-control" id="countdown5Date" type="date"/>
+			</div>
+			<div class="form-group col-6">
+				<label class="col-form-label" for="countdown5Time">Time:</label>
+				<input class="form-control" id="countdown5Time" type="time"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown5PreText">Pre Text:</label>
+				<input class="form-control" id="countdown5PreText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown5PostText">Post Text:</label>
+				<input class="form-control" id="countdown5PostText" type="text"/>
+			</div>
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown5FinishedText">On Completion:</label>
+				<input class="form-control" id="countdown5FinishedText" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<!-- {pre} {datetime} {post} -->
+			<div class="form-group col-12">
+				<label class="col-form-label" for="countdown5Format">Display Format:</label>
+				<input class="form-control" id="countdown5Format" type="text"/>
+			</div>
+			<!-- # days and, -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown5FormatDays">Days:</label>
+				<input class="form-control" id="countdown5FormatDays" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown5FormatHours">Hours:</label>
+				<input class="form-control" id="countdown5FormatHours" type="text"/>
+			</div>
+			<!-- #: -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown5FormatMins">Minutes:</label>
+				<input class="form-control" id="countdown5FormatMins" type="text"/>
+			</div>
+			<!-- # -->
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown5FormatSecs">Seconds:</label>
+				<input class="form-control" id="countdown5FormatSecs" type="text"/>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-5">
+				<label class="col-form-label" for="countdown5BackgroundColor">BG Color:</label>
+				<input class="form-control" id="countdown5BackgroundColor" type="text"/>
+			</div>
+			<div class="form-group col-4">
+				<label class="col-form-label" for="countdown5TextColor">Text Color:</label>
+				<input class="form-control" id="countdown5TextColor" type="text"/>
+			</div>
+			<div class="form-group col-3">
+				<label class="col-form-label" for="countdown5TextSize">Text Size:</label>
+				<input class="form-control" id="countdown5TextSize" type="text"/>
+			</div>
+		</div>
+	</fieldset>
+</div>
+
+<br/>
+<br/>
+<button class="btn btn-primary" id="updateCountdown">Submit</button>
+</div>
+</body>
+
+<!--<script src="example-ctrl.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>-->
+<script>
+	const update = document.querySelector('#updateCountdown');
+
+	let replicants = {}
+	let countdownElements = {}
+
+	//region Defaults
+	const defaultFormat = '{pre} {datetime} {post}';
+	const defaultFormatDays = '# days and, ';
+	const defaultFormatHours = '#:';
+	const defaultFormatMins = '#:';
+	const defaultFormatSecs = '#';
+	const defaultBGColor = '#000000bb';
+	const defaultTextColor = '#ffffff';
+	const defaultTextSize = '6em';
+	//endregion
+
+	for (let i = 1; i <= 5; i++) {
+		replicants['countdown'+i+'Replicant'] = nodecg.Replicant('countdown' + i);
+
+		countdownElements['countdown'+i+'Elements'] = {
+			'date': document.querySelector('#countdown' + i + 'Date'),
+			'time': document.querySelector('#countdown' + i + 'Time'),
+			'preText': document.querySelector('#countdown' + i + 'PreText'),
+			'postText': document.querySelector('#countdown' + i + 'PostText'),
+			'finishedText': document.querySelector('#countdown' + i + 'FinishedText'),
+			'format': document.querySelector('#countdown' + i + 'Format'),
+			'formatDays': document.querySelector('#countdown' + i + 'FormatDays'),
+			'formatHours': document.querySelector('#countdown' + i + 'FormatHours'),
+			'formatMins': document.querySelector('#countdown' + i + 'FormatMins'),
+			'formatSecs': document.querySelector('#countdown' + i + 'FormatSecs'),
+			'backgroundColor': document.querySelector('#countdown' + i + 'BackgroundColor'),
+			'textColor': document.querySelector('#countdown' + i + 'TextColor'),
+			'textSize': document.querySelector('#countdown' + i + 'TextSize'),
+		}
+
+		let countdown = countdownElements['countdown' + i + 'Elements'];
+		replicants['countdown' + i + 'Replicant'].on('change', (newDateTime, oldValue) => {
+			countdown.date.value = (newDateTime === undefined || !newDateTime.datetime)? '' : (newDateTime.datetime.date || '');
+			countdown.time.value = (newDateTime === undefined || !newDateTime.datetime)? '' : (newDateTime.datetime.time || '');
+
+			countdown.preText.value = (newDateTime === undefined || !newDateTime.text)? '' : (newDateTime.text.pre || '');
+			countdown.postText.value = (newDateTime === undefined || !newDateTime.text)? '' : (newDateTime.text.post || '');
+			countdown.finishedText.value = (newDateTime === undefined || !newDateTime.text)? '' : (newDateTime.text.complete || '');
+
+			countdown.format.value = (newDateTime === undefined || !newDateTime.formatting)? defaultFormat : (newDateTime.formatting.display || defaultFormat);
+			countdown.formatDays.value = (newDateTime === undefined || !newDateTime.formatting)? defaultFormatDays : (newDateTime.formatting.days || defaultFormatDays);
+			countdown.formatHours.value = (newDateTime === undefined || !newDateTime.formatting)? defaultFormatHours : (newDateTime.formatting.hours || defaultFormatHours);
+			countdown.formatMins.value = (newDateTime === undefined || !newDateTime.formatting)? defaultFormatMins : (newDateTime.formatting.mins || defaultFormatMins);
+			countdown.formatSecs.value = (newDateTime === undefined || !newDateTime.formatting)? defaultFormatSecs : (newDateTime.formatting.secs || defaultFormatSecs);
+
+			countdown.backgroundColor.value = (newDateTime === undefined || !newDateTime.style)? defaultBGColor : (newDateTime.style.background_color || defaultBGColor);
+			countdown.textColor.value = (newDateTime === undefined || !newDateTime.style)? defaultTextColor : (newDateTime.style.text_color || defaultTextColor);
+			countdown.textSize.value = (newDateTime === undefined || !newDateTime.style)? defaultTextSize : (newDateTime.style.text_size || defaultTextSize);
+		});
+	}
+
+	update.onclick = () => {
+		for (let i = 1; i <= 5; i++) {
+			saveData(i)
+		}
+	};
+
+	function saveData(countdown_id) {
+		let countdown = countdownElements['countdown' + countdown_id + 'Elements'];
+		replicants['countdown' + countdown_id + 'Replicant'].value = {
+			'datetime': {
+				'date': countdown.date.value,
+				'time': countdown.time.value,
+			},
+			'text': {
+				'pre': countdown.preText.value,
+				'post': countdown.postText.value,
+				'complete': countdown.finishedText.value,
+			},
+			'formatting': {
+				'display': countdown.format.value,
+				'days': countdown.formatDays.value,
+				'hours': countdown.formatHours.value,
+				'mins': countdown.formatMins.value,
+				'secs': countdown.formatSecs.value,
+			},
+			'style': {
+				'background_color': countdown.backgroundColor.value,
+				'text_color': countdown.textColor.value,
+				'text_size': countdown.textSize.value,
+			}
+		};
+	}
+</script>
+</html>

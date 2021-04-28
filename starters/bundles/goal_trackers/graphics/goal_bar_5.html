@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--	<link href="common.css" rel="stylesheet" type="text/css"/>-->
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#goal_bar {
+			position: absolute;
+			width: 100vw;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			overflow: hidden;
+		}
+
+		#goal_bar_progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+			overflow: hidden;
+			white-space: nowrap;
+			transition: width .6s ease;
+			display: flex;
+			align-items: center;
+		}
+
+		#goal_progress_text {
+			position: absolute;
+			width: 100vw;
+		}
+
+		#goal_text {
+			position: absolute;
+			width: 100vw;
+		}
+
+		#goal_container {
+			border: 5px solid red;
+			height: 300px;
+			display: flex;
+			justify-content: center;
+		}
+
+	</style>
+</head>
+<body>
+<!-- off bar text color || base bg color || font-size || "border" w/ same color as bar -->
+<div id="goal_container">
+	<div id="goal_bar">
+		<!-- Progress bar: on bar text color || bar bg color -->
+		<div id="goal_bar_progress" style="width: 10%; color: #ffffff; background-color: #000099;">
+			<div id="goal_progress_text" style="">This is just some text that will exist here...</div>
+		</div>
+		<div id="goal_text">This is just some text that will exist here...</div>
+	</div>
+</div>
+
+<script src="/bundles/utility/js/utilities.js"></script>
+<!--<script src="common.js"></script>-->
+<script>
+	const goal_bar_container_id = 'goal_container';
+	const goal_bar_container_padding = 20;
+
+	nodecg.Replicant('goal_bar_5').on('change', (newGoal, oldValue) => {
+		update(newGoal);
+	});
+
+	const goal_bar = document.getElementById("goal_bar");
+	const goal_bar_progress = document.getElementById("goal_bar_progress");
+	const goal_progress_text = document.getElementById("goal_progress_text");
+	const goal_text = document.getElementById("goal_text");
+	let last_set_goal_bar_style = '';
+
+	// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+	function update(newGoal) {
+		let current = parseInt(newGoal.progress.current)
+		let goal = parseInt(newGoal.progress.goal)
+		if (current <= 0 && goal <= 0) {
+			goal_bar.setAttribute('style', 'display: none;')
+			console.log('No goal set')
+			nodecg.log.warn('No goal set')
+			return;
+		}
+
+		let width = 0;
+		if (current > 0) {
+			width = Math.ceil((current / goal) * 100)
+			if (width >= 100) {
+				if (current < goal) width = 99;
+				else width = 100;
+			}
+		}
+
+		let goal_bar_style = '';
+		goal_bar_style += `height: ${newGoal.style.bar.size};`;
+		goal_bar_style += `color: ${newGoal.style.text.off_color};`;
+		goal_bar_style += `background-color: ${newGoal.style.bar.off_color};`;
+		goal_bar_style += `font-size: ${newGoal.style.text.size};`;
+		goal_bar_style += `outline: 1px solid ${newGoal.style.bar.color};`;
+		last_set_goal_bar_style = goal_bar_style;
+
+		let goal_bar_progress_style = '';
+		goal_bar_progress_style += `height: ${newGoal.style.bar.size};`;
+		goal_bar_progress_style += `width: ${width}%;`;
+		goal_bar_progress_style += `color: ${newGoal.style.text.color};`;
+		goal_bar_progress_style += `background-color: ${newGoal.style.bar.color};`;
+
+		goal_bar.setAttribute('style', goal_bar_style)
+		goal_bar_progress.setAttribute('style', goal_bar_progress_style)
+
+		updateWidths();
+
+		let bar_text = (current >= goal && newGoal.text.goal) ? newGoal.formatting.goal : newGoal.formatting.display;
+		bar_text = prepOutput(bar_text, {
+			pre: newGoal.text.pre,
+			finish: (newGoal.text.goal || ''),
+			current: newGoal.text.prefix + newGoal.progress.current,
+			goal: newGoal.text.prefix + newGoal.progress.goal,
+			post: newGoal.text.post,
+		});
+
+		goal_text.innerText = bar_text;
+		goal_progress_text.innerText = bar_text;
+	}
+
+function updateWidths() {
+	if (!goal_bar_container_id) return;
+
+	let container = document.getElementById(goal_bar_container_id);
+	let width = container.clientWidth - (goal_bar_container_padding * 2);
+	let width_adjustment = `width: ${width}px;`;
+
+	goal_progress_text.setAttribute('style', width_adjustment)
+	goal_text.setAttribute('style', width_adjustment)
+	goal_bar.setAttribute('style', last_set_goal_bar_style + width_adjustment)
+}
+
+window.onresize = updateWidths;
+</script>
+</body>
+</html>

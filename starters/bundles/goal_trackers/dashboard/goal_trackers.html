@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">-->
+<!--	<link rel="stylesheet" href="" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="h3">Toggle Goal Bar Settings</div>
+			<div class="row">
+				<button data-toggle="collapse" data-target="#goal_bar_1" class="ml-1 mr-1 col btn btn-primary" aria-expanded="true">1</button>
+				<button data-toggle="collapse" data-target="#goal_bar_2" class="ml-1 mr-1 col btn btn-warning collapsed" aria-expanded="false">2</button>
+				<button data-toggle="collapse" data-target="#goal_bar_3" class="ml-1 mr-1 col btn btn-light collapsed" aria-expanded="false">3</button>
+				<button data-toggle="collapse" data-target="#goal_bar_4" class="ml-1 mr-1 col btn btn-danger collapsed" aria-expanded="false">4</button>
+				<button data-toggle="collapse" data-target="#goal_bar_5" class="ml-1 mr-1 col btn btn-success collapsed" aria-expanded="false">5</button>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-5">
+		<fieldset id="goal_bar_1" class="border border-primary col-lg-4 col-md-6 collapse show">
+			<legend class="text-primary">Goal Bar 1</legend>
+			<div class="form-row">
+				<div class="form-group col-2">
+					<label class="col-form-label" for="goal_1_prefix">Prefix:</label>
+					<input class="form-control" id="goal_1_prefix" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_1_current">Current:</label>
+					<input class="form-control" id="goal_1_current" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_1_goal">Goal:</label>
+					<input class="form-control" id="goal_1_goal" type="text"/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_1_pre_text">Pre Text:</label>
+					<input class="form-control" id="goal_1_pre_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_1_post_text">Post Text:</label>
+					<input class="form-control" id="goal_1_post_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_1_goal_text">Goal Reached:</label>
+					<input class="form-control" id="goal_1_goal_text" type="text"/>
+				</div>
+			</div>
+			<fieldset class="form-row">
+				<legend>Display formats</legend>
+				<!-- {pre} - {current}/{goal} {post} -->
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_1_format">Normal:</label>
+					<input class="form-control" id="goal_1_format" type="text"/>
+				</div>
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_1_goal_format">Finished Goal:</label>
+					<input class="form-control" id="goal_1_goal_format" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Bars</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_bar_color">Bar Color:</label>
+					<input class="form-control" id="goal_1_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_off_bar_color">Off Color:</label>
+					<input class="form-control" id="goal_1_off_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_bar_size">Size:</label>
+					<input class="form-control" id="goal_1_bar_size" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Text</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_text_color">Text Color:</label>
+					<input class="form-control" id="goal_1_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_off_text_color">Off Color:</label>
+					<input class="form-control" id="goal_1_off_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_1_text_size">Size:</label>
+					<input class="form-control" id="goal_1_text_size" type="text"/>
+				</div>
+			</fieldset>
+		</fieldset>
+		<fieldset id="goal_bar_2" class="border border-warning col-lg-4 col-md-6 collapse">
+			<legend class="text-warning">Goal Bar 2</legend>
+			<div class="form-row">
+				<div class="form-group col-2">
+					<label class="col-form-label" for="goal_2_prefix">Prefix:</label>
+					<input class="form-control" id="goal_2_prefix" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_2_current">Current:</label>
+					<input class="form-control" id="goal_2_current" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_2_goal">Goal:</label>
+					<input class="form-control" id="goal_2_goal" type="text"/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_2_pre_text">Pre Text:</label>
+					<input class="form-control" id="goal_2_pre_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_2_post_text">Post Text:</label>
+					<input class="form-control" id="goal_2_post_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_2_goal_text">Goal Reached:</label>
+					<input class="form-control" id="goal_2_goal_text" type="text"/>
+				</div>
+			</div>
+			<fieldset class="form-row">
+				<legend>Display formats</legend>
+				<!-- {pre} - {current}/{goal} {post} -->
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_2_format">Normal:</label>
+					<input class="form-control" id="goal_2_format" type="text"/>
+				</div>
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_2_goal_format">Finished Goal:</label>
+					<input class="form-control" id="goal_2_goal_format" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Bars</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_bar_color">Bar Color:</label>
+					<input class="form-control" id="goal_2_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_off_bar_color">Off Color:</label>
+					<input class="form-control" id="goal_2_off_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_bar_size">Size:</label>
+					<input class="form-control" id="goal_2_bar_size" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Text</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_text_color">Text Color:</label>
+					<input class="form-control" id="goal_2_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_off_text_color">Off Color:</label>
+					<input class="form-control" id="goal_2_off_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_2_text_size">Size:</label>
+					<input class="form-control" id="goal_2_text_size" type="text"/>
+				</div>
+			</fieldset>
+		</fieldset>
+		<fieldset id="goal_bar_3" class="border border-light col-lg-4 col-md-6 collapse">
+			<legend class="text-light">Goal Bar 3</legend>
+			<div class="form-row">
+				<div class="form-group col-2">
+					<label class="col-form-label" for="goal_3_prefix">Prefix:</label>
+					<input class="form-control" id="goal_3_prefix" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_3_current">Current:</label>
+					<input class="form-control" id="goal_3_current" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_3_goal">Goal:</label>
+					<input class="form-control" id="goal_3_goal" type="text"/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_3_pre_text">Pre Text:</label>
+					<input class="form-control" id="goal_3_pre_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_3_post_text">Post Text:</label>
+					<input class="form-control" id="goal_3_post_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_3_goal_text">Goal Reached:</label>
+					<input class="form-control" id="goal_3_goal_text" type="text"/>
+				</div>
+			</div>
+			<fieldset class="form-row">
+				<legend>Display formats</legend>
+				<!-- {pre} - {current}/{goal} {post} -->
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_3_format">Normal:</label>
+					<input class="form-control" id="goal_3_format" type="text"/>
+				</div>
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_3_goal_format">Finished Goal:</label>
+					<input class="form-control" id="goal_3_goal_format" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Bars</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_bar_color">Bar Color:</label>
+					<input class="form-control" id="goal_3_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_off_bar_color">Off Color:</label>
+					<input class="form-control" id="goal_3_off_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_bar_size">Size:</label>
+					<input class="form-control" id="goal_3_bar_size" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Text</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_text_color">Text Color:</label>
+					<input class="form-control" id="goal_3_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_off_text_color">Off Color:</label>
+					<input class="form-control" id="goal_3_off_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_3_text_size">Size:</label>
+					<input class="form-control" id="goal_3_text_size" type="text"/>
+				</div>
+			</fieldset>
+		</fieldset>
+		<fieldset id="goal_bar_4" class="border border-danger col-lg-4 col-md-6 collapse">
+			<legend class="text-danger">Goal Bar 4</legend>
+			<div class="form-row">
+				<div class="form-group col-2">
+					<label class="col-form-label" for="goal_4_prefix">Prefix:</label>
+					<input class="form-control" id="goal_4_prefix" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_4_current">Current:</label>
+					<input class="form-control" id="goal_4_current" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_4_goal">Goal:</label>
+					<input class="form-control" id="goal_4_goal" type="text"/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_4_pre_text">Pre Text:</label>
+					<input class="form-control" id="goal_4_pre_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_4_post_text">Post Text:</label>
+					<input class="form-control" id="goal_4_post_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_4_goal_text">Goal Reached:</label>
+					<input class="form-control" id="goal_4_goal_text" type="text"/>
+				</div>
+			</div>
+			<fieldset class="form-row">
+				<legend>Display formats</legend>
+				<!-- {pre} - {current}/{goal} {post} -->
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_4_format">Normal:</label>
+					<input class="form-control" id="goal_4_format" type="text"/>
+				</div>
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_4_goal_format">Finished Goal:</label>
+					<input class="form-control" id="goal_4_goal_format" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Bars</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_bar_color">Bar Color:</label>
+					<input class="form-control" id="goal_4_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_off_bar_color">Off Color:</label>
+					<input class="form-control" id="goal_4_off_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_bar_size">Size:</label>
+					<input class="form-control" id="goal_4_bar_size" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Text</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_text_color">Text Color:</label>
+					<input class="form-control" id="goal_4_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_off_text_color">Off Color:</label>
+					<input class="form-control" id="goal_4_off_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_4_text_size">Size:</label>
+					<input class="form-control" id="goal_4_text_size" type="text"/>
+				</div>
+			</fieldset>
+		</fieldset>
+		<fieldset id="goal_bar_5" class="border border-success col-lg-4 col-md-6 collapse">
+			<legend class="text-success">Goal Bar 5</legend>
+			<div class="form-row">
+				<div class="form-group col-2">
+					<label class="col-form-label" for="goal_5_prefix">Prefix:</label>
+					<input class="form-control" id="goal_5_prefix" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_5_current">Current:</label>
+					<input class="form-control" id="goal_5_current" type="text"/>
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="goal_5_goal">Goal:</label>
+					<input class="form-control" id="goal_5_goal" type="text"/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_5_pre_text">Pre Text:</label>
+					<input class="form-control" id="goal_5_pre_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_5_post_text">Post Text:</label>
+					<input class="form-control" id="goal_5_post_text" type="text"/>
+				</div>
+				<div class="form-group col-12">
+					<label class="col-form-label" for="goal_5_goal_text">Goal Reached:</label>
+					<input class="form-control" id="goal_5_goal_text" type="text"/>
+				</div>
+			</div>
+			<fieldset class="form-row">
+				<legend>Display formats</legend>
+				<!-- {pre} - {current}/{goal} {post} -->
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_5_format">Normal:</label>
+					<input class="form-control" id="goal_5_format" type="text"/>
+				</div>
+				<div class="form-group col-6">
+					<label class="col-form-label" for="goal_5_goal_format">Finished Goal:</label>
+					<input class="form-control" id="goal_5_goal_format" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Bars</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_bar_color">Bar Color:</label>
+					<input class="form-control" id="goal_5_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_off_bar_color">Off Color:</label>
+					<input class="form-control" id="goal_5_off_bar_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_bar_size">Size:</label>
+					<input class="form-control" id="goal_5_bar_size" type="text"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-row">
+				<legend>Text</legend>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_text_color">Text Color:</label>
+					<input class="form-control" id="goal_5_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_off_text_color">Off Color:</label>
+					<input class="form-control" id="goal_5_off_text_color" type="color"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="goal_5_text_size">Size:</label>
+					<input class="form-control" id="goal_5_text_size" type="text"/>
+				</div>
+			</fieldset>
+		</fieldset>
+	</div>
+	<div class="row mt-3">
+		<button class="btn btn-primary" id="updateGoals">Update</button>
+	</div>
+</div>
+</body>
+
+<!--<script src="example-ctrl.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>-->
+<script>
+	const update = document.querySelector('#updateGoals');
+
+	let replicants = {}
+	let goalElements = {}
+
+	//region Defaults
+	const defaultPrefix = '$';
+	const defaultFormat = '{pre} - {current}/{goal} {post}';
+	const defaultGoalFormat = '{finish} ({current}/{goal})';
+	const defaultBarBGColor = '#000099';
+	const defaultBarOffBGColor = '#ffffff';
+	const defaultTextColor = '#ffffff';
+	const defaultTextOffColor = '#000000';
+	const defaultBarSize = '150px';
+	const defaultTextSize = '6em';
+	//endregion
+
+	for (let i = 1; i <= 5; i++) {
+		replicants['goal'+i+'Replicant'] = nodecg.Replicant('goal_bar_' + i);
+
+		goalElements['goal'+i+'Elements'] = {
+			'current': document.querySelector('#goal_'+i+'_current'),
+			'goal': document.querySelector('#goal_'+i+'_goal'),
+			'pre_text': document.querySelector('#goal_'+i+'_pre_text'),
+			'post_text': document.querySelector('#goal_'+i+'_post_text'),
+			'goal_text': document.querySelector('#goal_'+i+'_goal_text'),
+			'prefix': document.querySelector('#goal_'+i+'_prefix'),
+			'format': document.querySelector('#goal_'+i+'_format'),
+			'goal_format': document.querySelector('#goal_'+i+'_goal_format'),
+			'bar_color': document.querySelector('#goal_'+i+'_bar_color'),
+			'off_bar_color': document.querySelector('#goal_'+i+'_off_bar_color'),
+			'bar_size': document.querySelector('#goal_'+i+'_bar_size'),
+			'text_color': document.querySelector('#goal_'+i+'_text_color'),
+			'off_text_color': document.querySelector('#goal_'+i+'_off_text_color'),
+			'text_size': document.querySelector('#goal_'+i+'_text_size'),
+		}
+
+		let goal_bar = goalElements['goal' + i + 'Elements'];
+		replicants['goal' + i + 'Replicant'].on('change', (newGoal, oldValue) => {
+			goal_bar.current.value = (newGoal === undefined || !newGoal.progress)? '0' : (newGoal.progress.current || '0');
+			goal_bar.goal.value = (newGoal === undefined || !newGoal.progress)? '0' : (newGoal.progress.goal || '0');
+
+			goal_bar.pre_text.value = (newGoal === undefined || !newGoal.text)? '' : (newGoal.text.pre || '');
+			goal_bar.post_text.value = (newGoal === undefined || !newGoal.text)? '' : (newGoal.text.post || '');
+			goal_bar.goal_text.value = (newGoal === undefined || !newGoal.text)? '' : (newGoal.text.goal || '');
+			goal_bar.prefix.value = (newGoal === undefined || !newGoal.text)? defaultPrefix : (newGoal.text.prefix || '');
+
+			goal_bar.format.value = (newGoal === undefined || !newGoal.formatting)? defaultFormat : (newGoal.formatting.display || defaultFormat);
+			goal_bar.goal_format.value = (newGoal === undefined || !newGoal.formatting)? defaultGoalFormat : (newGoal.formatting.goal || defaultGoalFormat);
+
+			goal_bar.bar_color.value = (newGoal === undefined || !newGoal.style || !newGoal.style.bar)? defaultBarBGColor : (newGoal.style.bar.color || defaultBarBGColor);
+			goal_bar.off_bar_color.value = (newGoal === undefined || !newGoal.style || !newGoal.style.bar)? defaultBarOffBGColor : (newGoal.style.bar.off_color || defaultBarOffBGColor);
+			goal_bar.bar_size.value = (newGoal === undefined || !newGoal.style || !newGoal.style.bar)? defaultBarSize : (newGoal.style.bar.size || defaultBarSize);
+
+			goal_bar.text_color.value = (newGoal === undefined || !newGoal.style || !newGoal.style.text)? defaultTextColor : (newGoal.style.text.color || defaultTextColor);
+			goal_bar.off_text_color.value = (newGoal === undefined || !newGoal.style || !newGoal.style.text)? defaultTextOffColor : (newGoal.style.text.off_color || defaultTextOffColor);
+			goal_bar.text_size.value = (newGoal === undefined || !newGoal.style || !newGoal.style.text)? defaultTextSize : (newGoal.style.text.size || defaultTextSize);
+		});
+	}
+
+	update.onclick = () => {
+		for (let i = 1; i <= 5; i++) {
+			saveData(i)
+		}
+	};
+
+	function saveData(goal_bar_id) {
+		let goal_bar = goalElements['goal' + goal_bar_id + 'Elements'];
+		replicants['goal' + goal_bar_id + 'Replicant'].value = {
+			'progress': {
+				'current': goal_bar.current.value,
+				'goal': goal_bar.goal.value,
+			},
+			'text': {
+				'pre': goal_bar.pre_text.value,
+				'post': goal_bar.post_text.value,
+				'goal': goal_bar.goal_text.value,
+				'prefix': goal_bar.prefix.value,
+			},
+			'formatting': {
+				'display': goal_bar.format.value,
+				'goal': goal_bar.goal_format.value,
+			},
+			'style': {
+				'bar': {
+					'color': goal_bar.bar_color.value,
+					'off_color': goal_bar.off_bar_color.value,
+					'size': goal_bar.bar_size.value,
+				},
+				'text': {
+					'color': goal_bar.text_color.value,
+					'off_color': goal_bar.off_text_color.value,
+					'size': goal_bar.text_size.value,
+				}
+			}
+		};
+	}
+</script>
+</html>

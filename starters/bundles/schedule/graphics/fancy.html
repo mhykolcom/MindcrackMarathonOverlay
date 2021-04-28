@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://kit.fontawesome.com/7f875991c8.js" crossorigin="anonymous"></script>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+		}
+		#calendar {
+			display: flex;
+			justify-content: space-between;
+			width: 1920px;
+			height: 100vh;
+			position: relative;
+		}
+		#calendar.loading {
+			transition: none !important;
+			opacity: 0 !important;
+		}
+		#calendar.shown {
+			opacity: 1;
+			top: 0;
+			transition: opacity .75s ease-in .75s, top 1.5s ease-in;
+		}
+		#calendar.hidden {
+			opacity: 0;
+			top: 100%;
+			transition: opacity .75s ease-out, top 2s ease-out;
+		}
+		.schedule_container {
+			position: relative;
+			background-size: 900px 222px;
+			background-repeat: no-repeat;
+			background-position: 0 0;
+			margin: 0 20px;
+			font-size: 1em;
+			width: 900px;
+			height: 222px;
+		}
+		#now {
+			background-image: url('backgrounds/red.png');
+		}
+		#next {
+			background-image: url('backgrounds/blue.png');
+		}
+		.icon_container {
+			position: absolute;
+			top: 33px;
+			left: 41px;
+			color: #fff;
+		}
+		.icon {
+			width: 9.0em;
+			height: 9.0em;
+		}
+		.headline_text {
+			position: absolute;
+			top: 21px;
+			left: 300px;
+			color: #fff;
+			font-size: 2.0em;
+		}
+		.schedule_text {
+			position: absolute;
+			top: 71px;
+			left: 236px;
+			color: #fff;
+			font-size: 4.0em;
+			width: 620px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+<i data-fa-symbol="new" class="fad fa-calendar-alt"></i>
+<i data-fa-symbol="next" class="fad fa-calendar-star"></i>
+
+<div id="calendar" class="loading shown">
+	<div class="schedule_container" id="now">
+		<div class="icon_container">
+			<svg class="icon"><use xlink:href="#new"></use></svg>
+		</div>
+		<div class="headline_text">On Now:</div>
+		<div class="schedule_text" id="now_message"></div>
+	</div>
+	<div class="schedule_container" id="next">
+		<div class="icon_container">
+			<svg class="icon"><use xlink:href="#next"></use></svg>
+		</div>
+		<div class="headline_text">Up Next:</div>
+		<div class="schedule_text" id="next_message"></div>
+	</div>
+</div>
+</body>
+
+<script>
+	const nowMessage = document.querySelector('#now_message');
+	const nextMessage = document.querySelector('#next_message');
+	const scheduleReplicant = nodecg.Replicant('schedule');
+
+	let loaded = false;
+
+	scheduleReplicant.on('change', (newSchedule, oldValue) => {
+		nowMessage.innerText = newSchedule.now;
+		nextMessage.innerText = newSchedule.next;
+
+		if (!loaded) {
+			document.querySelector('#calendar').classList.remove('loading');
+			loaded = true;
+		}
+	});
+</script>
+</html>

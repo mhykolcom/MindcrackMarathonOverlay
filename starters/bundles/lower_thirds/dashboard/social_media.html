@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html>
+<head>
+	<!--	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<!--<script src="/bundles/utility/js/jquery-3.5.1.slim.min.js"></script>-->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/7f875991c8.js" crossorigin="anonymous"></script>
+
+	<style>
+		.icon {
+			width: 1.5em;
+			height: 1.5em;
+			color: white;
+		}
+		.input-group-text { background: #3b3b3b; }
+		.input-group-text.discord { background-color: #7289da; }
+		.input-group-text.twitter { background-color: #1da1f2; }
+		.input-group-text.twitch { background-color: #6441a5; }
+		.input-group-text.youtube { background-color: #ff0000; }
+		.input-group-text.instagram { background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%); }
+		.input-group-text.facebook { background-color: #486bf0; }
+		.input-group-text.snapchat { background-color: #fffc00; }
+	</style>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<span class="text-mute">(Separate multiple with a comma (,). A max of 12 will be shown.)</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-4 mt-2" id="platforms"></div>
+	</div>
+	<div class="row mt-3">
+		<div class="col-6">
+			<div class="btn-group" role="group" aria-label="">
+				<input class="form-control col-4" id="flash_time" type="number" value="10" />
+				<button class="btn btn-primary" id="flash">Flash X Secs</button>
+			</div>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-success btn-block" id="show">Show</button>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-danger btn-block" id="hide">Hide All</button>
+		</div>
+	</div>
+</div>
+
+<template id="platform_template">
+	<div class="form-row" data-platform="">
+		<div class="form-group col-6">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<i data-fa-symbol="" class=""></i>
+						<svg class="icon"><use></use></svg>
+					</span>
+				</div>
+				<input class="form-control platform_value" type="text" placeholder="" />
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="btn-group" role="group" aria-label="">
+				<input class="form-control col-4 flash_time" type="number" value="10"/>
+				<button class="btn btn-primary flash_button">Flash X Secs</button>
+			</div>
+		</div>
+		<div class="col-2">
+			<button class="btn btn-success btn-block show_button">Show</button>
+		</div>
+	</div>
+</template>
+
+<script src="common.js"></script>
+</body>
+
+<!--<script src="example-ctrl.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>-->
+<script>
+	const messageTarget = 'socialControl';
+	const $platforms = $('#platforms');
+	const platforms = [
+		{
+			id: 'discord',
+			icon: 'fab fa-discord',
+			placeholder: 'Discord',
+		},
+		{
+			id: 'twitter',
+			icon: 'fab fa-twitter',
+			placeholder: 'Twitter',
+		},
+		{
+			id: 'twitch',
+			icon: 'fab fa-twitch',
+			placeholder: 'Twitch',
+		},
+		{
+			id: 'youtube',
+			icon: 'fab fa-youtube',
+			placeholder: 'YouTube',
+		},
+		{
+			id: 'instagram',
+			icon: 'fab fa-instagram',
+			placeholder: 'Instagram',
+		},
+		{
+			id: 'facebook',
+			icon: 'fab fa-facebook',
+			placeholder: 'Facebook',
+		},
+		{
+			id: 'snapchat',
+			icon: 'fab fa-snapchat',
+			placeholder: 'Snapchat',
+		},
+		{
+			id: 'email',
+			icon: 'far fa-envelope',
+			placeholder: 'Email',
+		},
+		{
+			id : 'generic',
+			icon: 'far fa-comment-alt-smile',
+			placeholder: 'Generic / Other',
+		}
+	]
+
+	const $template = $('#platform_template');
+	for (const platform in platforms) {
+		let $newPlatform = $($template.html());
+		let platformData = platforms[platform];
+		let targetPlatform = platformData.platform || platformData.id;
+		$newPlatform.attr('id', platformData.id)
+		$newPlatform.attr('data-platform', targetPlatform)
+
+		let $icon = $newPlatform.find('.input-group-text');
+		$icon.addClass(platformData.id)
+		$icon.find('i').addClass(platformData.icon)
+		$icon.find('i').attr('data-fa-symbol', `${platformData.id}_icon`)
+		// $icon.find('use').attr('xlink:href', `#${platformData.id}_icon`)
+		$icon.find('use').attr('href', `#${platformData.id}_icon`)
+
+		let $platformInput = $newPlatform.find('.platform_value');
+		$platformInput.attr('placeholder', platformData.placeholder)
+
+		let $flashButton = $newPlatform.find('.flash_button');
+		$flashButton.attr('data-platform', targetPlatform);
+
+		let $showButton = $newPlatform.find('.show_button');
+		$showButton.attr('data-platform', targetPlatform);
+
+		$platforms.append($newPlatform);
+	}
+
+	const replicant = nodecg.Replicant('social_media');
+
+	let element = document.querySelector('#Something');
+	replicant.on('change', (newValues, oldValues) => {
+		if (!newValues) return;
+
+		for (const platform in platforms) {
+			const id=platforms[platform].id
+			if (!(id in newValues)) continue;
+
+			$(`#${id}`).find('.platform_value').val(newValues[id]);
+		}
+	});
+
+	$platforms.on('click', '.flash_button', (e)=>{
+		let $this = $(e.target);
+		let target = $this.data('platform');
+
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'flash', $this.parent().find('.flash_time').val(), target);
+	});
+	$platforms.on('click', '.show_button', (e)=>{
+		let $this = $(e.target);
+		let target = $this.data('platform');
+
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'show', null, target);
+	});
+
+	//endregion
+
+	function saveData() {
+		let saveData = {}
+		for (const platform in platforms) {
+			const id = platforms[platform].id
+			saveData[id] = $(`#${id}`).find('.platform_value').val();
+		}
+
+		setSaveData(saveData);
+	}
+
+	initCommonData(replicant, messageTarget, saveData, saveData)
+</script>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "utility",
+  "version": "1.0.0",
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "mount": [
+      {
+        "directory": "js",
+        "endpoint": "js"
+      },
+      {
+        "directory": "css",
+        "endpoint": "css"
+      }
+    ]
+  }
+}

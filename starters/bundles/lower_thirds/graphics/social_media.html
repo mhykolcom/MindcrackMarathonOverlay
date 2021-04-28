@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://kit.fontawesome.com/7f875991c8.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+		}
+
+		#placards {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			height: 450px;
+			opacity: 1;
+			position: relative;
+			top: 0;
+		}
+
+		#placards.loading {
+			transition: none !important;
+			opacity: 0 !important;
+		}
+
+		#placards.hidden {
+			opacity: 0;
+			top: 100%;
+			transition: opacity .75s ease-out, top 2s ease-out;
+		}
+
+		#placards.shown {
+			opacity: 1;
+			top: 0;
+			transition: opacity .75s ease-in .75s, top 1.5s ease-in;
+		}
+
+		.placard {
+			/* border: 1px solid red; */
+			font-size: 1em;
+			color: #fff;
+			display: flex;
+			align-items: center;
+			height: 80px;
+			width: 550px;
+			min-width: 550px;
+			padding: 0 20px;
+			transition: top .75s ease, left .75s ease, right .75s ease, bottom .75s ease;
+			position: relative;
+			bottom: 0;
+			background-size: 550px 80px;
+			background-repeat: no-repeat;
+			background-position: 20px 0;
+			margin: 8px 0;
+		}
+
+		.placard.discord { background-image: url('social_media_backgrounds/discord.png'); }
+		.placard.twitter { background-image: url('social_media_backgrounds/twitter.png'); }
+		.placard.twitch { background-image: url('social_media_backgrounds/twitch.png'); }
+		.placard.youtube { background-image: url('social_media_backgrounds/youtube.png'); }
+		.placard.instagram { background-image: url('social_media_backgrounds/instagram.png'); }
+		.placard.facebook { background-image: url('social_media_backgrounds/facebook.png'); }
+		.placard.snapchat { background-image: url('social_media_backgrounds/snapchat.png'); }
+		.placard.email { background-image: url('social_media_backgrounds/generic.png'); }
+		.placard.generic { background-image: url('social_media_backgrounds/generic.png'); }
+
+		.placard_box {
+			position: relative;
+			height: 80px;
+			width: 550px;
+		}
+
+		.platform_location, .icon_container {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		/*Some Name of Person On*/
+		.platform_location {
+			font-size: 2.5em;
+			top: 14px;
+			left: 103px;
+			width: 435px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			color: #000;
+		}
+
+		.icon_container {
+			top: 15px;
+			left: 19px;
+			color: #fff;
+		}
+
+		.icon {
+			width: 3.0em;
+			height: 3.0em;
+		}
+	</style>
+</head>
+<body>
+<div id="placards" class="hidden loading"></div>
+
+<i data-fa-symbol="discord_icon" class="fab fa-discord"></i>
+<i data-fa-symbol="twitter_icon" class="fab fa-twitter"></i>
+<i data-fa-symbol="twitch_icon" class="fab fa-twitch"></i>
+<i data-fa-symbol="youtube_icon" class="fab fa-youtube"></i>
+<i data-fa-symbol="instagram_icon" class="fab fa-instagram"></i>
+<i data-fa-symbol="facebook_icon" class="fab fa-facebook"></i>
+<i data-fa-symbol="snapchat_icon" class="fab fa-snapchat"></i>
+<i data-fa-symbol="email_icon" class="far fa-envelope"></i>
+<i data-fa-symbol="generic_icon" class="far fa-comment-alt-smile"></i>
+
+<template id="template">
+	<div class="placard">
+		<div class="placard_box">
+			<div class="icon_container">
+				<svg class="icon">
+					<use xlink:href="#nothing_icon"></use>
+				</svg>
+			</div>
+			<div class="platform_location"></div>
+		</div>
+	</div>
+</template>
+
+<script src="/bundles/utility/js/utilities.js"></script>
+<!--suppress JSUnfilteredForInLoop -->
+<script>
+	let loaded = false;
+	const ACTION_HIDE = 'hide';
+	const ACTION_SHOW = 'show';
+	const ACTION_FLASH = 'flash';
+
+	const template = document.querySelector('#template');
+	const placardContainer = document.querySelector('#placards');
+
+	let lastTarget = null;
+	let flashTimeout = 0;
+	let callouts = [];
+	let calloutsByPlatform = {};
+
+	nodecg.Replicant('social_media').on('change', (newValue, oldValue) => {
+		if (!!newValue) {
+			callouts = [];
+			calloutsByPlatform = {};
+			for (const platform in newValue) {
+				let data = newValue[platform];
+				if (!data) continue;
+
+				data = data.trim();
+				if (data.endsWith(',')) data = data.slice(0, -1).trim();
+				if (!data) continue;
+				let calloutList = data.split(',');
+
+				calloutsByPlatform[platform] = [];
+				for (const i in calloutList) {
+					let callout = calloutList[i].trim();
+					callouts.push({'type': platform, 'callout': callout});
+					calloutsByPlatform[platform].push(callout);
+				}
+			}
+		}
+
+		if (!loaded) {
+			placardContainer.classList.remove('loading')
+			loaded = true;
+		}
+	});
+
+	function doSocialControl(data) {
+		// console.log('name control: ', data)
+		if (!data.action) return logError('Requested social control, but no action was specified', data);
+		if (![ACTION_HIDE, ACTION_SHOW, ACTION_FLASH].includes(data.action)) return logError('Unknown action', data)
+
+		let action = data.action;
+		let target = data.target || null;
+		let checksum = makeChecksum();
+		let currentChecksum = getChecksum();
+
+		if (
+			placardContainer.classList.contains('shown')
+			&& [ACTION_SHOW, ACTION_FLASH].includes(action)
+			&& currentChecksum === checksum
+			&& target === lastTarget
+		) {
+			return checkFlash(data);
+		}
+
+		// Hide before modifying
+		hidePlacards();
+		if (flashTimeout > 0) clearTimeout(flashTimeout)
+		let timeoutTime = (placardContainer.textContent.length > 0)? 1000 : 50;
+
+		setTimeout(()=> {
+			placardContainer.textContent = '';
+			if (action === ACTION_HIDE) return;
+
+			if (target) {
+				let count = 0;
+				for (const i in calloutsByPlatform[target]) {
+					createPlacard(calloutsByPlatform[target][i], target);
+					if (++count === 12) break;
+				}
+			} else {
+				let count = 0;
+				for (const i in callouts) {
+					createPlacard(callouts[i].callout, callouts[i].type);
+					if (++count === 12) break;
+				}
+			}
+
+			setChecksum(checksum);
+			lastTarget = target
+
+			setTimeout(()=> {
+				// Show again
+				showPlacards();
+				checkFlash(data);
+			}, 100);
+		}, timeoutTime);
+	}
+
+	nodecg.listenFor('socialControl', doSocialControl)
+
+	function logError(message, data) {
+		nodecg.log.error(message, data);
+		console.error(message, data);
+		return null;
+	}
+
+	function createPlacard(callout, type) {
+		template.content.querySelector('.platform_location').textContent = callout;
+		let icon = template.content.querySelector('.icon use')
+		icon.setAttribute('xlink:href',`#${type}_icon`);
+		icon.setAttribute('href',`#${type}_icon`);
+
+		let clone = document.importNode(template.content, true);
+		clone.querySelector('.placard').classList.add(type);
+		placardContainer.appendChild(clone)
+	}
+
+	function hidePlacards() {
+		placardContainer.classList.add('hidden');
+		placardContainer.classList.remove('shown');
+	}
+
+	function showPlacards() {
+		placardContainer.classList.add('shown');
+		placardContainer.classList.remove('hidden');
+	}
+
+	function checkFlash(data) {
+		if (data.action === ACTION_FLASH && data.time) {
+			flashTimeout = setTimeout(() => {
+				hidePlacards();
+				flashTimeout = 0;
+			}, parseInt(data.time) * 1000);
+		}
+	}
+
+	function makeChecksum() {
+		return MD5(JSON.stringify(callouts, function (k, v) {
+			if (k[0] === "_") return undefined; // remove api stuff
+			else if (typeof v === "function") // consider functions
+				return v.toString();
+			else return v;
+		}));
+	}
+
+	function getChecksum() {
+		return placardContainer.getAttribute('data-hash');
+	}
+
+	function setChecksum(checksum) {
+		placardContainer.setAttribute('data-hash', checksum);
+	}
+
+</script>
+</body>
+</html>

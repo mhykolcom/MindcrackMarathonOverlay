@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
+
+#placards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	height: 150px;
+	opacity: 1;
+	position: relative;
+	top: 0;
+}
+
+#placards.loading {
+	transition: none !important;
+	opacity: 0 !important;
+}
+
+#placards.hidden {
+	opacity: 0;
+	top: 100%;
+	transition: opacity .75s ease-out, top 2s ease-out;
+}
+
+#placards.shown {
+	opacity: 1;
+	top: 0;
+	transition: opacity .75s ease-in .75s, top 1.5s ease-in;
+}
+
+.placard {
+	/* border: 1px solid red; */
+	font-size: 1em;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	height: 134px;
+	width: 550px;
+	min-width: 550px;
+	padding: 0 20px;
+	position: relative;
+	bottom: 0;
+	background-size: 550px 134px;
+	background-repeat: no-repeat;
+	background-position: 20px 0;
+	margin: 8px 0;
+}
+
+.placard.discord { background-image: url('placard_backgrounds/discord.png'); }
+.placard.twitter { background-image: url('placard_backgrounds/twitter.png'); }
+.placard.twitch { background-image: url('placard_backgrounds/twitch.png'); }
+.placard.youtube { background-image: url('placard_backgrounds/youtube.png'); }
+.placard.instagram { background-image: url('placard_backgrounds/instagram.png'); }
+.placard.facebook { background-image: url('placard_backgrounds/facebook.png'); }
+.placard.snapchat { background-image: url('placard_backgrounds/snapchat.png'); }
+.placard.email { background-image: url('placard_backgrounds/generic.png'); }
+.placard.generic { background-image: url('placard_backgrounds/generic.png'); }
+
+.placard_box {
+	position: relative;
+	height: 134px;
+	width: 550px;
+}
+
+.single .placard {}
+.duo .placard {}
+.trio .placard {}
+
+.left {}
+.right {}
+.middle {}
+
+.name, .contact, .icon_container { position: absolute; top: 0; left: 0; }
+
+/*Some Name of Person On*/
+.name {
+	font-size: 2.5em;
+	top: 64px;
+	left: 130px;
+	width: 420px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.contact {
+	top: 16px;
+	left: 120px;
+	font-size: 1.2em;
+	width: 204px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.icon_container {
+	top: 35px;
+	left: 35px;
+}
+
+.icon {
+	width: 4.2em;
+	height: 4.2em;
+}

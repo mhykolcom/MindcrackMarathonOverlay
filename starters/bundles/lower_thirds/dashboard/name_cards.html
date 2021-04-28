@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">-->
+	<!--	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+	<style>
+		fieldset {
+			border: 1px solid #fff;
+		}
+		legend {
+			width: initial;
+			padding: 0 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<fieldset class="col-md-12 col-lg-4 mt-2">
+			<legend>Single / Left</legend>
+			<div class="form-row" id="left">
+				<div class="form-group col-4">
+					<label class="col-form-label" for="left_name">Name:</label>
+					<input class="form-control" id="left_name" type="text" maxlength="22" />
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="left_contact">Contact:</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<select class="form-control" id="left_contact_type">
+								<option value="discord">Discord</option>
+								<option value="twitter">Twitter</option>
+								<option value="twitch">Twitch</option>
+								<option value="youtube">YouTube</option>
+								<option value="instagram">Instagram</option>
+								<option value="facebook">Facebook</option>
+								<option value="snapchat">Snapchat</option>
+								<option value="email">Email</option>
+								<option value="generic">Generic</option>
+							</select>
+						</div>
+						<input class="form-control" id="left_contact" type="text" maxlength="20" />
+					</div>
+				</div>
+
+				<div class="col-3">
+					<div class="form-row">
+						<div class="col-12">
+							<div class="btn-group" role="group" aria-label="">
+								<input class="form-control form-control-sm col-4" id="flash_left_time" type="number" value="10"/>
+								<button class="btn btn-sm btn-primary" id="flash_left">Flash X Secs</button>
+							</div>
+						</div>
+						<div class="col-12 mt-3">
+							<button class="btn btn-sm btn-success btn-block" id="show_left">Show</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<hr />
+		<fieldset class="col-md-12 col-lg-4 mt-2">
+			<legend>Middle</legend>
+			<div class="form-row" id="middle">
+				<div class="form-group col-4">
+					<label class="col-form-label" for="middle_name">Name:</label>
+					<input class="form-control" id="middle_name" type="text" maxlength="22" />
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="middle_contact">Contact:</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<select class="form-control" id="middle_contact_type">
+								<option value="discord">Discord</option>
+								<option value="twitter">Twitter</option>
+								<option value="twitch">Twitch</option>
+								<option value="youtube">YouTube</option>
+								<option value="instagram">Instagram</option>
+								<option value="facebook">Facebook</option>
+								<option value="snapchat">Snapchat</option>
+								<option value="email">Email</option>
+								<option value="generic">Generic</option>
+							</select>
+						</div>
+						<input class="form-control" id="middle_contact" type="text" maxlength="20" />
+					</div>
+				</div>
+
+				<div class="col-3">
+					<div class="form-row">
+						<div class="col-12">
+							<div class="btn-group" role="group" aria-label="">
+								<input class="form-control form-control-sm col-4" id="flash_middle_time" type="number" value="10"/>
+								<button class="btn btn-sm btn-primary" id="flash_middle">Flash X Secs</button>
+							</div>
+						</div>
+						<div class="col-12 mt-3">
+							<button class="btn btn-sm btn-success btn-block" id="show_middle">Show</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<hr/>
+		<fieldset class="col-md-12 col-lg-4 mt-2">
+			<legend>Right</legend>
+			<div class="form-row" id="right">
+				<div class="form-group col-4">
+					<label class="col-form-label" for="right_name">Name:</label>
+					<input class="form-control" id="right_name" type="text" maxlength="22" />
+				</div>
+				<div class="form-group col-5">
+					<label class="col-form-label" for="right_contact">Contact:</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<select class="form-control" id="right_contact_type">
+								<option value="discord">Discord</option>
+								<option value="twitter">Twitter</option>
+								<option value="twitch">Twitch</option>
+								<option value="youtube">YouTube</option>
+								<option value="instagram">Instagram</option>
+								<option value="facebook">Facebook</option>
+								<option value="snapchat">Snapchat</option>
+								<option value="email">Email</option>
+								<option value="generic">Generic</option>
+							</select>
+						</div>
+						<input class="form-control" id="right_contact" type="text" maxlength="20" />
+					</div>
+				</div>
+
+				<div class="col-3">
+					<div class="form-row">
+						<div class="col-12">
+							<div class="btn-group" role="group" aria-label="">
+								<input class="form-control form-control-sm col-4" id="flash_right_time" type="number" value="10"/>
+								<button class="btn btn-sm btn-primary" id="flash_right">Flash X Secs</button>
+							</div>
+						</div>
+						<div class="col-12 mt-3">
+							<button class="btn btn-sm btn-success btn-block" id="show_right">Show</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="row mt-4">
+		<div class="col-6">
+			<div class="btn-group" role="group" aria-label="">
+				<input class="form-control col-4" id="flash_time" type="number" value="10" />
+				<button class="btn btn-primary" id="flash">Flash X Secs</button>
+			</div>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-success btn-block" id="show">Show</button>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-danger btn-block" id="hide">Hide All</button>
+		</div>
+	</div>
+</div>
+
+<script src="common.js"></script>
+</body>
+
+<!--<script src="example-ctrl.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>-->
+<script>
+	const $left = $('#left');
+	const $middle = $('#middle');
+	const $right = $('#right');
+	const messageTarget = 'nameControl'
+
+	const replicant = nodecg.Replicant('name_cards');
+
+	//region Action Buttons
+	// Left buttons
+	document.querySelector('#flash_left').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'flash', $('#flash_left_time').val(), 'left');
+	};
+	document.querySelector('#show_left').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'show', null, 'left');
+	};
+	// Middle buttons
+	document.querySelector('#flash_middle').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'flash', $('#flash_middle_time').val(), 'middle');
+	};
+	document.querySelector('#show_middle').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'show', null, 'middle');
+	};
+	// Right buttons
+	document.querySelector('#flash_right').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'flash', $('#flash_right_time').val(), 'right');
+	};
+	document.querySelector('#show_right').onclick = () => {
+		saveData();
+		saveReplicantData();
+		sendControlMessage(messageTarget, 'show', null, 'right');
+	};
+	//endregion
+
+	let element = document.querySelector('#Something');
+	replicant.on('change', (newValues, oldValues) => {
+		setElements($left, newValues.left);
+		setElements($middle, newValues.middle);
+		setElements($right, newValues.right);
+	});
+
+	function setElements($parent, data) {
+		let id = $parent.attr('id');
+
+		$('#'+id+'_name').val(data.name || '');
+		$('#'+id+'_contact').val(data.contact || '');
+		$('#'+id+'_contact_type').val(data.type || 'generic');
+	}
+
+	function getElements($parent) {
+		let id = $parent.attr('id');
+
+		return {
+			name: $('#' + id + '_name').val(),
+			contact: $('#' + id + '_contact').val(),
+			type: $('#' + id + '_contact_type').val()
+		}
+	}
+
+	function saveData() {
+		setSaveData({
+			left: getElements($left),
+			middle: getElements($middle),
+			right: getElements($right)
+		});
+	}
+
+	initCommonData(replicant, messageTarget, saveData, saveData)
+</script>
+</html>

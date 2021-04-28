@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="common.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- off bar text color || base bg color || font-size || "border" w/ same color as bar -->
+<div id="goal_bar">
+	<!-- Progress bar: on bar text color || bar bg color -->
+	<div id="goal_bar_progress" style="width: 10%; color: #ffffff; background-color: #000099;">
+		<div id="goal_progress_text" style="">This is just some text that will exist here...</div>
+	</div>
+	<div id="goal_text">This is just some text that will exist here...</div>
+</div>
+
+<script src="/bundles/utility/js/utilities.js"></script>
+<script src="common.js"></script>
+<script>
+	nodecg.Replicant('goal_bar_4').on('change', (newGoal, oldValue) => {
+		update(newGoal);
+	});
+</script>
+</body>
+</html>
