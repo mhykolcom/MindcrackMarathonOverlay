@@ -68,9 +68,19 @@
     ],
     "graphics": [
       {
-        "file": "index.html",
+        "file": "bar.html",
         "width": 1280,
-        "height": 720
+        "height": 97
+      },
+      {
+        "file": "lower3rd.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "timer.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },
