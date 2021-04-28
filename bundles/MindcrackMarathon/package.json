@@ -1,0 +1,40 @@
+{
+  "name": "nodecg",
+  "version": "0.0.0",
+  "description": "Dynamic broadcast graphics rendered in a browser",
+  "homepage": "https://nodecg.dev/",
+  "author": {
+    "name": "Mhykol",
+    "email": "mhykol@gmail.com",
+    "url": "https://mindcrackmarathon.com"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "mindcrack-marathon",
+        "title": "Mindcrack Marathon",
+        "file": "mindcrack-marathon.html",
+        "fullbleed": true,
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1280,
+        "height": 720
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git"
+}
