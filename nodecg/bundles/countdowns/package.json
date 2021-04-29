@@ -26,7 +26,8 @@
         "title": "Countdowns",
         "width": 4,
         "file": "countdowns.html",
-        "headerColor": "#43DBFF"
+        "headerColor": "#43DBFF",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [

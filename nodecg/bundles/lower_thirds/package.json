@@ -28,14 +28,16 @@
         "title": "Talking Name Cards",
         "width": 6,
         "file": "name_cards.html",
-        "headerColor": "#e07514"
+        "headerColor": "#e07514",
+        "workspace": "Main Workspace"
       },
       {
         "name": "social_media",
         "title": "Social Media Placards",
         "width": 5,
         "file": "social_media.html",
-        "headerColor": "#e07514"
+        "headerColor": "#e07514",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [

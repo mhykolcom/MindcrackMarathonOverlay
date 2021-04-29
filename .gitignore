@@ -105,3 +105,6 @@ dist
 
 # IDE specific things
 .idea
+
+# Yo generator
+.yo-rc.json

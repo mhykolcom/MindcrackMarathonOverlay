@@ -179,7 +179,7 @@ function parseWorkspaces() {
 	if (defaultWorkspaceHasPanels || !otherWorkspacesHavePanels) {
 		workspaces.unshift({
 			name: 'default',
-			label: otherWorkspacesHavePanels ? 'Main Workspace' : 'Workspace',
+			label: otherWorkspacesHavePanels ? 'Dashboard' : 'Workspace',
 			route: ''
 		});
 	}

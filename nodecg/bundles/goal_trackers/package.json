@@ -27,7 +27,8 @@
         "title": "Goal Trackers",
         "width": 6,
         "file": "goal_trackers.html",
-        "headerColor": "#e0a800"
+        "headerColor": "#e0a800",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [

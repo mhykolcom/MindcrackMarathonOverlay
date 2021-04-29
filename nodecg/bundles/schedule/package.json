@@ -27,7 +27,8 @@
         "title": "Schedule",
         "width": 4,
         "file": "schedule.html",
-        "headerColor": "#3DB329"
+        "headerColor": "#3DB329",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [
