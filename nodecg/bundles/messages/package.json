@@ -1,0 +1,40 @@
+{
+  "name": "messages",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "twitter",
+        "title": "Twitter",
+        "width": 4,
+        "file": "twitter.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "el_donations",
+        "title": "Extra Life Donations",
+        "width": 4,
+        "file": "el.html",
+        "headerColor": "#525F78"
+      }
+    ]
+  }
+}
