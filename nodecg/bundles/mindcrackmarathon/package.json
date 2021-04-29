@@ -22,13 +22,6 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "info",
-        "title": "Info",
-        "width": 3,
-        "file": "info.html",
-        "headerColor": "#525F78"
-      },
-      {
         "name": "messages",
         "title": "Messages",
         "width": 3,
