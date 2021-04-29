@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+</head>
+<body>
+	<h2>Idea/Purpose:</h2>
+
+	<div>
+		<p>Settings for the main bar</p>
+		<ul>
+			<li>Segment Control<br />("Time Left", "Current Total", etc)</li>
+			<ul>
+				<li>Size</li>
+				<li>Labels</li>
+				<li>Data fill</li>
+				<li>Add/Remove</li>
+			</ul>
+			<li>Sponsor Logo Upload</li>
+			<li>Color Scheme</li>
+			<li>Additional overlays to show</li>
+			<ul>
+				<li>Schedule/"Up Next"</li>
+				<li>Latest Donations</li>
+				<li>"Special Thanks"/Sponsors</li>
+				<li>Some current stat thing... Idk</li>
+			</ul>
+		</ul>
+	</div>
+
+
+	<p>To edit: "<span id="path" class="monospace"></span>"</p>
+
+	<script>
+		document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
+
+		// You can access the NodeCG api anytime from the `window.nodecg` object
+		// Or just `nodecg` for short. Like this!:
+		nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
+	</script>
+</body>
+</html>

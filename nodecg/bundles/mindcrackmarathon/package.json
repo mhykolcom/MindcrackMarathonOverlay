@@ -29,41 +29,35 @@
         "headerColor": "#525F78"
       },
       {
-        "name": "timer",
-        "title": "Timer",
+        "name": "messages",
+        "title": "Messages",
         "width": 3,
-        "file": "timer.html",
+        "file": "messages.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "twitter",
-        "title": "Twitter",
+        "name": "setup",
+        "title": "Setup",
         "width": 3,
-        "file": "twitter.html",
-        "headerColor": "#525F78"
-      },
-      {
-        "name": "keys",
-        "title": "Keys",
-        "width": 3,
-        "file": "keys.html",
+        "file": "setup.html",
         "headerColor": "#525F78",
         "workspace": "Admin"
       },
       {
-        "name": "countdown",
-        "title": "Countdown",
+        "name": "contacts",
+        "title": "Contacts",
         "width": 3,
-        "file": "countdown.html",
+        "file": "contacts.html",
         "headerColor": "#525F78",
         "workspace": "Admin"
       },
       {
-        "name": "names",
-        "title": "Speaker Names",
+        "name": "bar_settings",
+        "title": "Main Bar Settings",
         "width": 3,
-        "file": "names.html",
-        "headerColor": "#525F78"
+        "file": "bar_settings.html",
+        "headerColor": "#525F78",
+        "workspace": "Admin"
       }
     ],
     "graphics": [
@@ -74,11 +68,6 @@
       },
       {
         "file": "lower3rd.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "timer.html",
         "width": 1920,
         "height": 1080
       }

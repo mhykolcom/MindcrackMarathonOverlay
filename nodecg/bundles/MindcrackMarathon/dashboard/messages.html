@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+</head>
+<body>
+	<!--
+	TODO: Split this off into it's own bundle. It's big enough to justify it
+		Also, multiple panels. One for each service tracked.
+		Fow now, 1 for twitter and 1 for ELU donations
+	-->
+	<h2>Idea/Purpose:</h2>
+
+	<p>Display Twitter/ELU donation Messages</p>
+
+	<p>Will have all messages from ELU donations or tracked Twitter feed(s), and will give buttons to approve and display on stream, or reject (discard without reading)</p>
+
+	<p>To edit: "<span id="path" class="monospace"></span>"</p>
+
+	<script>
+		document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
+
+		// You can access the NodeCG api anytime from the `window.nodecg` object
+		// Or just `nodecg` for short. Like this!:
+		nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
+	</script>
+</body>
+</html>
