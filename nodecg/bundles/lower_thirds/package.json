@@ -1,6 +1,6 @@
 {
   "name": "lower_thirds",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "homepage": "",
   "author": {
@@ -28,13 +28,6 @@
         "title": "Talking Name Cards",
         "width": 6,
         "file": "name_cards.html",
-        "headerColor": "#e07514"
-      },
-      {
-        "name": "lower_thirds",
-        "title": "Generic Lower-Thirds",
-        "width": 8,
-        "file": "lower_thirds.html",
         "headerColor": "#e07514"
       },
       {
