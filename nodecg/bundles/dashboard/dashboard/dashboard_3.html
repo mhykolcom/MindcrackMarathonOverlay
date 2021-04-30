@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+</head>
+<body>
+<h2>Idea/Purpose:</h2>
+
+<div>
+	<p>Display some sort of dashboard worth info</p>
+	<ul>
+		<li>Stats</li>
+		<li>Progress bar for something</li>
+		<li>Timer for something</li>
+		<li>Alerts/Notifications for things</li>
+		<li>Idk... Weather? Is that something people care about at marathons?</li>
+	</ul>
+</div>
+
+<p>To edit: "<span id="path" class="monospace"></span>"</p>
+
+<script>
+	document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
+
+	// You can access the NodeCG api anytime from the `window.nodecg` object
+	// Or just `nodecg` for short. Like this!:
+	// nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
+</script>
+</body>
+</html>

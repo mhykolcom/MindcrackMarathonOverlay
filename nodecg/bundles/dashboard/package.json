@@ -1,0 +1,56 @@
+{
+  "name": "dashboard",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Strange Penguin",
+    "email": "strange@penguin.dev",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "dashboard1",
+        "title": "Info 1",
+        "width": 2,
+        "file": "dashboard_1.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "dashboard2",
+        "title": "Info 2",
+        "width": 2,
+        "file": "dashboard_2.html",
+        "headerColor": "#526F79"
+      },
+      {
+        "name": "dashboard3",
+        "title": "Info 3",
+        "width": 2,
+        "file": "dashboard_3.html",
+        "headerColor": "#527F80"
+      },
+      {
+        "name": "dashboard4",
+        "title": "Info 4",
+        "width": 2,
+        "file": "dashboard_4.html",
+        "headerColor": "#528F81"
+      }
+    ]
+  },
+  "repository": "https://github.com/mhykolcom/MindcrackMarathonOverlay.git",
+  "license": "GPL-3.0"
+}
