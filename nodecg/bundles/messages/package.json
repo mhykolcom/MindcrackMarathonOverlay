@@ -34,6 +34,14 @@
         "width": 4,
         "file": "el.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "message_styles",
+        "title": "Messaging Style",
+        "width": 4,
+        "file": "styles.html",
+        "headerColor": "#525F78",
+        "workspace": "Admin"
       }
     ]
   }
