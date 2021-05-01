@@ -108,3 +108,5 @@ dist
 
 # Yo generator
 .yo-rc.json
+
+/other_nodecg_stuff/bundles_to_pull_from
