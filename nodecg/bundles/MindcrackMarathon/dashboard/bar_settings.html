@@ -1,47 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title></title>
 	<style>
-		.monospace {
-			font-family: monospace;
+		a.nav-link {
+			color: white;
 		}
 	</style>
 </head>
 <body>
-	<h2>Idea/Purpose:</h2>
 
-	<div>
-		<p>Settings for the main bar</p>
-		<ul>
-			<li>Segment Control<br />("Time Left", "Current Total", etc)</li>
-			<ul>
-				<li>Size</li>
-				<li>Labels</li>
-				<li>Data fill</li>
-				<li>Add/Remove</li>
-			</ul>
-			<li>Sponsor Logo Upload</li>
-			<li>Color Scheme</li>
-			<li>Additional overlays to show</li>
-			<ul>
-				<li>Schedule/"Up Next"</li>
-				<li>Latest Donations</li>
-				<li>"Special Thanks"/Sponsors</li>
-				<li>Some current stat thing... Idk</li>
-			</ul>
-		</ul>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-main-tab" data-toggle="tab" href="#nav-main" role="tab" aria-controls="nav-main" aria-selected="true">Main</a>
+					<a class="nav-item nav-link" id="nav-color-tab" data-toggle="tab" href="#nav-color" role="tab" aria-controls="nav-color" aria-selected="false">Color</a>
+					<a class="nav-item nav-link" id="nav-section-tab" data-toggle="tab" href="#nav-section" role="tab" aria-controls="nav-section" aria-selected="false">Sections</a>
+					<a class="nav-item nav-link" id="nav-donation-tab" data-toggle="tab" href="#nav-donation" role="tab" aria-controls="nav-donation" aria-selected="false">Donation Bar</a>
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+
+				<!-- Main -->
+				<div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-3">
+							<label class="col-form-label" for="extraLife">Extra Life:</label>
+							<input class="form-control" id="extraLife" type="checkbox"/>
+						</div>
+						<div class="form-group col-3">
+							<label class="col-form-label" for="marathon">Marathon:</label>
+							<input class="form-control" id="marathon" type="checkbox"/>
+						</div>
+						<div class="form-group col-5 offset-1">
+							<label class="col-form-label" for="sponsorRotation">Sponsor Rotation Speed:</label>
+							<input class="form-control" id="sponsorRotation" type="text"/>
+							<small class="form-text">
+								In seconds
+							</small>
+						</div>
+					</div>
+				</div>
+
+				<!-- Color -->
+				<div class="tab-pane fade" id="nav-color" role="tabpanel" aria-labelledby="nav-color-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-4">
+							<label class="col-form-label" for="mainBarColor">Main Bar Color:</label>
+							<input class="form-control" id="mainBarColor" type="color"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="mainTextColor">Main Text Color:</label>
+							<input class="form-control" id="mainTextColor" type="color"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="barSeparatorColor">Separator Color:</label>
+							<input class="form-control" id="barSeparatorColor" type="color"/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Sections -->
+				<div class="tab-pane fade" id="nav-section" role="tabpanel" aria-labelledby="nav-section-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<div class="form-text text-center">The total width defined here must not pass 1320</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-6 offset-2">
+							<label class="col-form-label" for="section1Label">Section 1 Label:</label>
+							<input class="form-control" id="section1Label" type="text"/>
+						</div>
+						<div class="form-group col-2">
+							<label class="col-form-label" for="section1Width">Width:</label>
+							<input class="form-control" id="section1Width" type="text"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-6 offset-2">
+							<label class="col-form-label" for="section2Label">Section 2 Label:</label>
+							<input class="form-control" id="section2Label" type="text"/>
+						</div>
+						<div class="form-group col-2">
+							<label class="col-form-label" for="section2Width">Width:</label>
+							<input class="form-control" id="section2Width" type="text"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-6 offset-2">
+							<label class="col-form-label" for="section3Label">Section 3 Label:</label>
+							<input class="form-control" id="section3Label" type="text"/>
+						</div>
+						<div class="form-group col-2">
+							<label class="col-form-label" for="section3Width">Width:</label>
+							<input class="form-control" id="section3Width" type="text"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-6 offset-2">
+							<label class="col-form-label" for="section4Label">Section 4 Label:</label>
+							<input class="form-control" id="section4Label" type="text"/>
+						</div>
+						<div class="form-group col-2">
+							<label class="col-form-label" for="section4Width">Width:</label>
+							<input class="form-control" id="section4Width" type="text"/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Donation Bar -->
+				<div class="tab-pane fade" id="nav-donation" role="tabpanel" aria-labelledby="nav-donation-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-6">
+							<label class="col-form-label" for="donationBarFillColor">Primary Bar (fill) Color:</label>
+							<input class="form-control" id="donationBarFillColor" type="color"/>
+						</div>
+						<div class="form-group col-6">
+							<label class="col-form-label" for="donationBarOffColor">Secondary Bar (off) Color:</label>
+							<input class="form-control" id="donationBarOffColor" type="color"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-6">
+							<label class="col-form-label" for="donationBarTextFillColor">Primary Text (fill) Color:</label>
+							<input class="form-control" id="donationBarTextFillColor" type="color"/>
+						</div>
+						<div class="form-group col-6">
+							<label class="col-form-label" for="donationBarTextOffColor">Secondary Text (off) Color:</label>
+							<input class="form-control" id="donationBarTextOffColor" type="color"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="donationTextFormat">Text Format:</label>
+							<input class="form-control" id="donationTextFormat" type="text"/>
+							<small class="form-text">
+								The values {current}, {goal}, and {percent} will be substituted for the calculated values
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
+	<hr/>
 
-	<p>To edit: "<span id="path" class="monospace"></span>"</p>
+	<div class="row">
+		<div class="col">
+			<button class="btn btn-primary" id="updateLabels">Update</button>
+		</div>
+	</div>
+</div>
 
-	<script>
-		document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
 
-		// You can access the NodeCG api anytime from the `window.nodecg` object
-		// Or just `nodecg` for short. Like this!:
-		// nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
-	</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<script>
+	const extraLife = document.querySelector('#extraLife');
+	const marathon = document.querySelector('#marathon');
+	const sponsorRotation = document.querySelector('#sponsorRotation');
+
+	const mainBarColor = document.querySelector('#mainBarColor');
+	const mainTextColor = document.querySelector('#mainTextColor');
+	const barSeparatorColor = document.querySelector('#barSeparatorColor');
+
+	const section1Label = document.querySelector('#section1Label');
+	const section1Width = document.querySelector('#section1Width');
+	const section2Label = document.querySelector('#section2Label');
+	const section2Width = document.querySelector('#section2Width');
+	const section3Label = document.querySelector('#section3Label');
+	const section3Width = document.querySelector('#section3Width');
+	const section4Label = document.querySelector('#section4Label');
+	const section4Width = document.querySelector('#section4Width');
+
+	const donationBarFillColor = document.querySelector('#donationBarFillColor');
+	const donationBarOffColor = document.querySelector('#donationBarOffColor');
+	const donationBarTextFillColor = document.querySelector('#donationBarTextFillColor');
+	const donationBarTextOffColor = document.querySelector('#donationBarTextOffColor');
+	const donationPreText = document.querySelector('#donationPreText');
+	const donationPostText = document.querySelector('#donationPostText');
+	const donationTextFormat = document.querySelector('#donationTextFormat');
+
+	const update = document.querySelector('#updateLabels');
+
+	const settingReplicant = nodecg.Replicant('main_bar_settings');
+
+	settingReplicant.on('change', (newData, oldValue) => {
+		newData = newData || {}
+
+		extraLife.checked = newData.extraLife === undefined ? true : newData.extraLife;
+		marathon.checked = newData.marathon === undefined ? true : newData.marathon;
+		let sponsorRotationValue = parseInt(newData.sponsorRotation || '60000');
+		sponsorRotation.value = sponsorRotationValue/1000;
+
+		mainBarColor.value = newData.mainBarColor || '#19181a';
+		mainTextColor.value = newData.mainTextColor || '#ffffff';
+		barSeparatorColor.value = newData.barSeparatorColor || '#ffffff';
+
+		section1Label.value = newData.section1Label || 'Time Left';
+		section2Label.value = newData.section2Label || 'Current Total';
+		section3Label.value = newData.section3Label || 'Current Goal';
+		section4Label.value = newData.section4Label || 'Last Donation';
+		section1Width.value = newData.section1Width || '220';
+		section2Width.value = newData.section2Width || '300';
+		section3Width.value = newData.section3Width || '300';
+		section4Width.value = newData.section4Width || '380';
+
+		donationBarFillColor.value = newData.donationBarFillColor || '#8ed717';
+		donationBarOffColor.value = newData.donationBarOffColor || '#5f780d';
+		donationBarTextFillColor.value = newData.donationBarTextFillColor || '#000000';
+		donationBarTextOffColor.value = newData.donationBarTextOffColor || '#ffffff';
+		donationTextFormat.value = newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far';
+	});
+
+	update.onclick = () => {
+		let sponsorRotationValue = parseInt(sponsorRotation.value);
+		sponsorRotationValue *= 1000
+
+		settingReplicant.value={
+			// Main
+			extraLife: extraLife.checked,
+			marathon: marathon.checked,
+			sponsorRotation: sponsorRotationValue,
+
+			// Color
+			mainBarColor: mainBarColor.value,
+			mainTextColor: mainTextColor.value,
+			barSeparatorColor: barSeparatorColor.value,
+
+			// Sections
+			section1Label: section1Label.value.trim(),
+			section2Label: section2Label.value.trim(),
+			section3Label: section3Label.value.trim(),
+			section4Label: section4Label.value.trim(),
+			section1Width: parseInt(section1Width.value),
+			section2Width: parseInt(section2Width.value),
+			section3Width: parseInt(section3Width.value),
+			section4Width: parseInt(section4Width.value),
+
+			// Donations
+			donationBarFillColor: donationBarFillColor.value,
+			donationBarOffColor: donationBarOffColor.value,
+			donationBarTextFillColor: donationBarTextFillColor.value,
+			donationBarTextOffColor: donationBarTextOffColor.value,
+			donationTextFormat: donationTextFormat.value.trim(),
+		}
+	};
+</script>
 </body>
 </html>

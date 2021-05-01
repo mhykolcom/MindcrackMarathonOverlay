@@ -40,7 +40,7 @@
       {
         "name": "bar_settings",
         "title": "Main Bar Settings",
-        "width": 3,
+        "width": 4,
         "file": "bar_settings.html",
         "headerColor": "#525F78",
         "workspace": "Admin"
@@ -48,7 +48,12 @@
     ],
     "graphics": [
       {
-        "file": "bar.html",
+        "file": "top_bar.html",
+        "width": 1920,
+        "height": 97
+      },
+      {
+        "file": "bottom_bar.html",
         "width": 1920,
         "height": 97
       },
@@ -56,6 +61,13 @@
         "file": "lower3rd.html",
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "sponsors",
+        "title": "Sponsors",
+        "allowedTypes": ["jpg", "jpeg", "gif", "png"]
       }
     ]
   },
