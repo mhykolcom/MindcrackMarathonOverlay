@@ -1,0 +1,17 @@
+{
+	"baseURL": "{==URL==}",
+	"login": {
+		"enabled": true,
+		"sessionSecret": "{==SECRET==}",
+		"forceHttpsReturn": true,
+		"twitch": {
+			"enabled": true,
+			"clientID": "{==CLIENT_ID==}",
+			"clientSecret": "{==CLIENT_SECRET==}",
+			"scope": "user_read",
+			"allowedUsernames": [
+				"{==ALLOWED_USER==}"
+			]
+		}
+	}
+}

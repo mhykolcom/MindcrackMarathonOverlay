@@ -11,9 +11,6 @@ npm-debug.log
 # Logs
 /logs/**
 
-# Configs
-/cfg
-
 # OS specific
 .DS_Store
 
