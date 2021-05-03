@@ -20,6 +20,7 @@
 					<a class="nav-item nav-link" id="nav-color-tab" data-toggle="tab" href="#nav-color" role="tab" aria-controls="nav-color" aria-selected="false">Color</a>
 					<a class="nav-item nav-link" id="nav-section-tab" data-toggle="tab" href="#nav-section" role="tab" aria-controls="nav-section" aria-selected="false">Sections</a>
 					<a class="nav-item nav-link" id="nav-donation-tab" data-toggle="tab" href="#nav-donation" role="tab" aria-controls="nav-donation" aria-selected="false">Donation Bar</a>
+					<a class="nav-item nav-link" id="nav-supp-tab" data-toggle="tab" href="#nav-supp" role="tab" aria-controls="nav-supp" aria-selected="false">Supplementary</a>
 				</div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
@@ -38,9 +39,7 @@
 						<div class="form-group col-5 offset-1">
 							<label class="col-form-label" for="sponsorRotation">Sponsor Rotation Speed:</label>
 							<input class="form-control" id="sponsorRotation" type="text"/>
-							<small class="form-text">
-								In seconds
-							</small>
+							<small class="form-text">In seconds</small>
 						</div>
 					</div>
 				</div>
@@ -144,6 +143,29 @@
 						</div>
 					</div>
 				</div>
+
+				<!-- Supplemental -->
+				<div class="tab-pane fade" id="nav-supp" role="tabpanel" aria-labelledby="nav-supp-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-4">
+							<label class="col-form-label" for="suppShowEvery">Show Rotation Every:</label>
+							<input class="form-control" id="suppShowEvery" type="text"/>
+							<small class="form-text">
+								In minutes. This is the delay between the rotation finishing, before it shows the first item again
+							</small>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="suppShowEach">Show Each For:</label>
+							<input class="form-control" id="suppShowEach" type="text"/>
+							<small class="form-text">In seconds</small>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="suppRotations">Rotations:</label>
+							<input class="form-control" id="suppRotations" type="text"/>
+							<small class="form-text">The number of times to loop the items before hiding</small>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -161,96 +183,115 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 <script>
-	const extraLife = document.querySelector('#extraLife');
-	const marathon = document.querySelector('#marathon');
-	const sponsorRotation = document.querySelector('#sponsorRotation');
+	const extraLife = $('#extraLife');
+	const marathon = $('#marathon');
+	const sponsorRotation = $('#sponsorRotation');
 
-	const mainBarColor = document.querySelector('#mainBarColor');
-	const mainTextColor = document.querySelector('#mainTextColor');
-	const barSeparatorColor = document.querySelector('#barSeparatorColor');
+	const mainBarColor = $('#mainBarColor');
+	const mainTextColor = $('#mainTextColor');
+	const barSeparatorColor = $('#barSeparatorColor');
 
-	const section1Label = document.querySelector('#section1Label');
-	const section1Width = document.querySelector('#section1Width');
-	const section2Label = document.querySelector('#section2Label');
-	const section2Width = document.querySelector('#section2Width');
-	const section3Label = document.querySelector('#section3Label');
-	const section3Width = document.querySelector('#section3Width');
-	const section4Label = document.querySelector('#section4Label');
-	const section4Width = document.querySelector('#section4Width');
+	const section1Label = $('#section1Label');
+	const section1Width = $('#section1Width');
+	const section2Label = $('#section2Label');
+	const section2Width = $('#section2Width');
+	const section3Label = $('#section3Label');
+	const section3Width = $('#section3Width');
+	const section4Label = $('#section4Label');
+	const section4Width = $('#section4Width');
 
-	const donationBarFillColor = document.querySelector('#donationBarFillColor');
-	const donationBarOffColor = document.querySelector('#donationBarOffColor');
-	const donationBarTextFillColor = document.querySelector('#donationBarTextFillColor');
-	const donationBarTextOffColor = document.querySelector('#donationBarTextOffColor');
-	const donationPreText = document.querySelector('#donationPreText');
-	const donationPostText = document.querySelector('#donationPostText');
-	const donationTextFormat = document.querySelector('#donationTextFormat');
+	const donationBarFillColor = $('#donationBarFillColor');
+	const donationBarOffColor = $('#donationBarOffColor');
+	const donationBarTextFillColor = $('#donationBarTextFillColor');
+	const donationBarTextOffColor = $('#donationBarTextOffColor');
+	const donationPreText = $('#donationPreText');
+	const donationPostText = $('#donationPostText');
+	const donationTextFormat = $('#donationTextFormat');
 
-	const update = document.querySelector('#updateLabels');
+	const suppShowEvery = $('#suppShowEvery');
+	const suppShowEach = $('#suppShowEach');
+	const suppRotations = $('#suppRotations');
+
+	const update = $('#updateLabels');
 
 	const settingReplicant = nodecg.Replicant('main_bar_settings');
 
 	settingReplicant.on('change', (newData, oldValue) => {
 		newData = newData || {}
 
-		extraLife.checked = newData.extraLife === undefined ? true : newData.extraLife;
-		marathon.checked = newData.marathon === undefined ? true : newData.marathon;
+		extraLife.prop('checked', newData.extraLife === undefined ? true : newData.extraLife);
+		marathon.prop('checked', newData.marathon === undefined ? true : newData.marathon);
 		let sponsorRotationValue = parseInt(newData.sponsorRotation || '60000');
-		sponsorRotation.value = sponsorRotationValue/1000;
+		sponsorRotation.val(sponsorRotationValue/1000);
 
-		mainBarColor.value = newData.mainBarColor || '#19181a';
-		mainTextColor.value = newData.mainTextColor || '#ffffff';
-		barSeparatorColor.value = newData.barSeparatorColor || '#ffffff';
+		mainBarColor.val(newData.mainBarColor || '#19181a');
+		mainTextColor.val(newData.mainTextColor || '#ffffff');
+		barSeparatorColor.val(newData.barSeparatorColor || '#ffffff');
 
-		section1Label.value = newData.section1Label || 'Time Left';
-		section2Label.value = newData.section2Label || 'Current Total';
-		section3Label.value = newData.section3Label || 'Current Goal';
-		section4Label.value = newData.section4Label || 'Last Donation';
-		section1Width.value = newData.section1Width || '220';
-		section2Width.value = newData.section2Width || '300';
-		section3Width.value = newData.section3Width || '300';
-		section4Width.value = newData.section4Width || '380';
+		section1Label.val(newData.section1Label || 'Time Left');
+		section2Label.val(newData.section2Label || 'Current Total');
+		section3Label.val(newData.section3Label || 'Current Goal');
+		section4Label.val(newData.section4Label || 'Last Donation');
+		section1Width.val(newData.section1Width || '220');
+		section2Width.val(newData.section2Width || '300');
+		section3Width.val(newData.section3Width || '300');
+		section4Width.val(newData.section4Width || '380');
 
-		donationBarFillColor.value = newData.donationBarFillColor || '#8ed717';
-		donationBarOffColor.value = newData.donationBarOffColor || '#5f780d';
-		donationBarTextFillColor.value = newData.donationBarTextFillColor || '#000000';
-		donationBarTextOffColor.value = newData.donationBarTextOffColor || '#ffffff';
-		donationTextFormat.value = newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far';
+		donationBarFillColor.val(newData.donationBarFillColor || '#8ed717');
+		donationBarOffColor.val(newData.donationBarOffColor || '#5f780d');
+		donationBarTextFillColor.val(newData.donationBarTextFillColor || '#000000');
+		donationBarTextOffColor.val(newData.donationBarTextOffColor || '#ffffff');
+		donationTextFormat.val(newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far');
+
+		let suppShowEveryValue = parseInt(newData.suppShowEvery || '60000');
+		suppShowEvery.val(suppShowEveryValue/60000);
+		let suppShowEachValue = parseInt(newData.suppShowEach || '20000');
+		suppShowEach.val(suppShowEachValue / 1000);
+		suppRotations.val(newData.suppRotations || '2');
 	});
 
-	update.onclick = () => {
-		let sponsorRotationValue = parseInt(sponsorRotation.value);
-		sponsorRotationValue *= 1000
+	update.on('click', () => {
+		let sponsorRotationValue = parseInt(sponsorRotation.val());
+		sponsorRotationValue *= 1000;
+		let suppShowEveryValue = parseInt(suppShowEvery.val());
+		suppShowEveryValue *= 60000;
+		let suppShowEachValue = parseInt(suppShowEach.val());
+		suppShowEachValue *= 1000;
 
 		settingReplicant.value={
 			// Main
-			extraLife: extraLife.checked,
-			marathon: marathon.checked,
+			extraLife: extraLife.prop('checked'),
+			marathon: marathon.prop('checked'),
 			sponsorRotation: sponsorRotationValue,
 
 			// Color
-			mainBarColor: mainBarColor.value,
-			mainTextColor: mainTextColor.value,
-			barSeparatorColor: barSeparatorColor.value,
+			mainBarColor: mainBarColor.val(),
+			mainTextColor: mainTextColor.val(),
+			barSeparatorColor: barSeparatorColor.val(),
 
 			// Sections
-			section1Label: section1Label.value.trim(),
-			section2Label: section2Label.value.trim(),
-			section3Label: section3Label.value.trim(),
-			section4Label: section4Label.value.trim(),
-			section1Width: parseInt(section1Width.value),
-			section2Width: parseInt(section2Width.value),
-			section3Width: parseInt(section3Width.value),
-			section4Width: parseInt(section4Width.value),
+			section1Label: section1Label.val().trim(),
+			section2Label: section2Label.val().trim(),
+			section3Label: section3Label.val().trim(),
+			section4Label: section4Label.val().trim(),
+			section1Width: parseInt(section1Width.val()),
+			section2Width: parseInt(section2Width.val()),
+			section3Width: parseInt(section3Width.val()),
+			section4Width: parseInt(section4Width.val()),
 
 			// Donations
-			donationBarFillColor: donationBarFillColor.value,
-			donationBarOffColor: donationBarOffColor.value,
-			donationBarTextFillColor: donationBarTextFillColor.value,
-			donationBarTextOffColor: donationBarTextOffColor.value,
-			donationTextFormat: donationTextFormat.value.trim(),
+			donationBarFillColor: donationBarFillColor.val(),
+			donationBarOffColor: donationBarOffColor.val(),
+			donationBarTextFillColor: donationBarTextFillColor.val(),
+			donationBarTextOffColor: donationBarTextOffColor.val(),
+			donationTextFormat: donationTextFormat.val().trim(),
+
+			// Supplementary Box
+			'suppShowEvery': suppShowEveryValue,
+			'suppShowEach': suppShowEachValue,
+			'suppRotations': parseInt(suppRotations.val()),
 		}
-	};
+	});
 </script>
 </body>
 </html>
