@@ -12,6 +12,114 @@ body {
 	width: 1920px;
 	height: 97px;
 	background: #19181A;
+	z-index: 10000000;
+}
+
+.bottom-bar #overlay-wrapper {
+	top: 70px;
+}
+
+#suppBox {
+	position: absolute;
+	top: 97px;
+	left: 0;
+	width: 1920px;
+	height: 70px;
+	transition: top .6s linear;
+	/*background: hotpink;*/
+}
+
+#suppBox .supp-message,
+#suppBox .supp-message .schedule-wrapper {
+	height: 100%;
+}
+
+#suppBox .schedule {
+	height: 100%;
+	display: flex;
+}
+
+#suppBox .schedule-icon {
+	position: absolute;
+	height: 70px;
+	width: 70px;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	background: #525252;
+}
+
+#suppBox .schedule-icon i {
+	color: white;
+	font-size: 3em;
+}
+
+#suppBox .schedule > div {
+	height: 100%;
+	width: 33%;
+	display: flex;
+	align-items: center;
+	color: white;
+	padding-left: 90px;
+	font-size: 2em;
+	transition: left 2s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	left: -110%;
+}
+
+#suppBox .shown .schedule > div {
+	left: 0;
+}
+
+#suppBox .shown .schedule > div:after {
+	content: ' ';
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: -25px;
+	transform: rotate(45deg);
+}
+
+#suppBox .schedule #schedule-now {
+	background: #525252;
+	z-index: 5;
+}
+
+#suppBox .schedule #schedule-now:after {
+	z-index: 4;
+	background: #525252;
+}
+
+#suppBox .schedule #schedule-next {
+	background: #894618;
+	z-index: 3;
+	transition-delay: 1s;
+}
+
+#suppBox .schedule #schedule-next:after {
+	background: #894618;
+	z-index: 2;
+}
+
+#suppBox .schedule #schedule-later {
+	background: #0500bb;
+	z-index: 1;
+	transition-delay: 2s;
+}
+
+#suppBox .schedule #schedule-later:after {
+	background: #0500bb;
+}
+
+.bottom-bar #suppBox {
+	top: 0;
+}
+
+.bottom-bar #suppBox.hidden {
+	top: 70px;
 }
 
 #sponsor-box {

@@ -10,13 +10,17 @@
 	<div class="row">
 		<div class="col">
 			<div class="form-row">
-				<div class="form-group col-6">
+				<div class="form-group col-4">
 					<label class="col-form-label" for="scheduleNow">Now:</label>
 					<input class="form-control" id="scheduleNow" type="text"/>
 				</div>
-				<div class="form-group col-6">
+				<div class="form-group col-4">
 					<label class="col-form-label" for="scheduleNext">Next:</label>
 					<input class="form-control" id="scheduleNext" type="text"/>
+				</div>
+				<div class="form-group col-4">
+					<label class="col-form-label" for="scheduleLater">After:</label>
+					<input class="form-control" id="scheduleLater" type="text"/>
 				</div>
 			</div>
 		</div>
@@ -32,22 +36,46 @@
 <script>
 	const now = document.querySelector('#scheduleNow');
 	const upNext = document.querySelector('#scheduleNext');
+	const later = document.querySelector('#scheduleLater');
 	const update = document.querySelector('#updateSchedule');
 
 	const scheduleReplicant = nodecg.Replicant('schedule');
+	const supplementalReplicant = nodecg.Replicant('supplemental', 'mindcrackmarathon');
 
 	scheduleReplicant.on('change', (newSchedule, oldValue) => {
 		// The value of the Replicant has changed somewhere in NodeCG,
 		// this could be another dashboard panel, a server initiated change,
 		// or the doing of another user accessing your dashboard panel.
 		let schedule = newSchedule;
-		now.value = schedule.now;
-		upNext.value = schedule.next;
+		now.value = schedule.now || '';
+		upNext.value = schedule.next || '';
+		later.value = schedule.later || '';
 	});
 
 	update.onclick = () => {
 		// A Replicant can be modified by modifying its `value`.
-		scheduleReplicant.value = {'now': now.value, 'next': upNext.value};
+		scheduleReplicant.value = {'now': now.value, 'next': upNext.value, 'later': later.value};
+		supplementalReplicant.value = supplementalReplicant.value || {};
+
+		let supplementals = supplementalReplicant.value
+		let element = `
+			<div class="schedule-wrapper">
+				<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
+				<div class="schedule">
+					<div id="schedule-now">
+						<div><span>Now: </span><span>${now.value}</span></div>
+					</div>
+					<div id="schedule-next">
+						<div><span>Next: </span><span>${upNext.value}</span></div>
+					</div>
+					<div id="schedule-later">
+						<div><span>Later: </span><span>${later.value}</span></div>
+					</div>
+				</div>
+			</div>
+		`;
+		supplementals['schedule'] = [element]
+		supplementalReplicant.value = supplementals;
 	};
 </script>
 </html>
