@@ -15,7 +15,6 @@
     "extension"
   ],
   "keywords": [
-    "",
     "nodecg-bundle"
   ],
   "nodecg": {
@@ -23,19 +22,13 @@
     "dashboardPanels": [
       {
         "name": "ticker",
-        "title": "Ticker",
-        "width": 2,
+        "title": "Ticker Messages",
+        "width": 4,
         "file": "ticker.html",
         "workspace": "Main Workspace",
-        "headerColor": "#525F78"
+        "headerColor": "#656565"
       }
     ],
-    "graphics": [
-      {
-        "file": "ticker.html",
-        "width": 1920,
-        "height": 70
-      }
-    ]
+    "graphics": []
   }
 }

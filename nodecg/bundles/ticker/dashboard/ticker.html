@@ -1,28 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-	<style>
-		.monospace {
-			font-family: monospace;
-		}
-	</style>
+	<meta charset="UTF-8">
+	<title></title>
+
+	<link href="css/icon-picker.min.css" type="text/css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/fa41cb755f.js" crossorigin="anonymous"></script>
+<!--	<script src="https://kit.fontawesome.com/7f875991c8.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>-->
 </head>
 <body>
-<h2>Idea/Purpose:</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<p>Add messages to display periodically show in the supplemental bar</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-8">
+			<label class="col-form-label">Message:</label>
+		</div>
+		<div class="col-2">
+			<label class="col-form-label">Color:</label>
+		</div>
+	</div>
+	<div id="tickerContainer">
 
-<div>
-	<p>Give a spot for staff to add multiple notes or messages to a ticker on the main bar. The ticker will cycle through messages when not being controlled via other bundles (like twitter/EL messages)</p>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="form-row mt-2">
+				<div class="form-group col-12">
+					<button id="save" class="btn btn-primary">Save</button>
+					<button id="add" class="btn btn-success">Add Message</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<p>To edit: "<span id="path" class="monospace"></span>"</p>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
+<script src="js/icon-picker.min.js"></script>
 <script>
-	document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
+	const messagingReplicant = nodecg.Replicant('messaging');
+	const supplementalReplicant = nodecg.Replicant('supplemental', 'mindcrackmarathon');
 
-	// You can access the NodeCG api anytime from the `window.nodecg` object
-	// Or just `nodecg` for short. Like this!:
-	// nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
+	let trackingIds = new Set();
+	const $tickerContainer = $('#tickerContainer');
+	const $save = $('#save');
+	const $addRow = $('#add');
+	const template=`
+		<div class="row">
+			<div class="col-12">
+				<div class="form-row mt-2">
+					<div class="form-group col-8">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="btn-group">
+                            		<button data-selected="fa-lightbulb" type="button" class="icp btn btn-secondary dropdown-toggle iconpicker-component" data-toggle="dropdown">
+                            				<i class="fas fa-fw iconpicker-component fa-lightbulb"></i>
+										<span class="caret"></span>
+									</button>
+                            		<div class="dropdown-menu iconpicker-container"></div>
+                        		</div>
+							</div>
+							<input type="hidden" class="ticker-icon" value="far fa-lightbulb" />
+							<input class="form-control ticker-message" id="tickerMessage-template" type="text"/>
+						</div>
+					</div>
+					<div class="form-group col-2">
+						<input class="form-control ticker-color" type="color" value="#656565"/>
+					</div>
+					<div class="form-group col-2">
+						<button class="btn btn-danger remove-row"><i class="fas fa-trash"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	`;
+
+	$tickerContainer.on('iconpickerSelected', function (e) {
+		$(e.target).closest('.row').find('.ticker-icon').val(e.iconpickerValue);
+	});
+
+	function getId(idElement) {
+		return idElement.attr('id').substr(14);
+	}
+
+	$tickerContainer.on('click', '.remove-row', (e)=>{
+		let $row = $(e.target).closest('.row');
+		const id = getId($row.find('.ticker-message'));
+		$row.find('.icp').data('iconpicker').destroy(); // Destroy the icon picker first, just to clean up and prevent possible memory leaks
+		$row.remove(); // Remove the rest of the row
+		trackingIds.delete(id);
+
+		// Add a new row if none exist anymore
+		if (!trackingIds.size) addRow();
+	});
+
+	function addRow(setup, isNew=true) {
+		// Set some vars
+		let clone = $(template).clone()
+		const setId = '' + (setup.id || Math.floor(Math.random() * 88888 + 11111));
+
+		// Replace some things
+		clone.attr('id', 'tickerRow-' + setId);
+		clone.find('.ticker-message').attr('id', 'tickerMessage-' + setId);
+		if (setup) { // Warning... Could also be an event object!
+			if (setup.message && (typeof setup.message == 'string')) clone.find('.ticker-message').val(setup.message);
+			if (setup.icon && (typeof setup.icon == 'string')) {
+				clone.find('.ticker-icon').val(setup.icon);
+				clone.find('.icp').data('selected', setup.icon);
+				clone.find('.icp i').attr('class', `fa-fw iconpicker-component ${setup.icon}`);
+			}
+			if (setup.color && (typeof setup.color == 'string')) {
+				clone.find('.ticker-color').val(setup.color);
+			}
+		}
+		if (isNew) clone.find('.ticker-message').addClass('new');
+
+		// Add to tracking set and show
+		trackingIds.add(setId);
+		$tickerContainer.append(clone);
+
+		// Activate icon picker
+		$tickerContainer.find(`#tickerRow-${setId} .icp`).iconpicker();
+	}
+
+	function updateRow(id, things) {
+		let $row = $('#tickerRow-' + id);
+
+		// Replace some things
+		if (things.message && (typeof things.message == 'string')) $row.find('.ticker-message').val(things.message);
+		if (things.icon && (typeof things.icon == 'string')) {
+			$row.find('.ticker-icon').val(things.icon);
+			$row.find('.icp').data('selected', things.icon);
+			$row.find('.icp i').attr('class', `fa-fw iconpicker-component ${things.icon}`);
+		}
+		if (things.color && (typeof things.color == 'string')) {
+			$row.find('.ticker-color').val(things.color);
+		}
+	}
+
+	$addRow.on('click', addRow);
+	$save.on('click', () => {
+		let count = 0;
+		let messages = {};
+		let suppMessages = [];
+		$tickerContainer.find('.ticker-message').each((index, element) => {
+			const $message = $(element);
+			const $row = $message.closest('.row');
+			const id = getId($message);
+			const message = $message.val().trim();
+			const icon = $row.find('.ticker-icon').val().trim();
+			const color = $row.find('.ticker-color').val().trim();
+			if (!message) return; // Skip adding blank messages
+			messages[id] = {message, icon, color};
+			suppMessages.push(`
+			<div class="ticker-line" style="background-color: ${color}">
+				<div class="ticker-icon"><i class="fa-fw ${icon}"></i></div>
+				<div class="ticker-message">${$message.val()}</div>
+			</div>
+			`);
+			count++;
+		});
+
+		// Save to replicants
+		messagingReplicant.value = {count, messages};
+		let supplementals = supplementalReplicant.value || {}
+		// If there are no messages, remove it from the supplementals
+		if (count) supplementals['ticker'] = suppMessages;
+		else delete supplementals['ticker'];
+		supplementalReplicant.value = supplementals;
+
+		// "Clean up" new messages
+		$tickerContainer.find('.ticker-message.new').removeClass('new');
+	});
+
+	messagingReplicant.on('change', (newMessageSet) => {
+		newMessageSet = newMessageSet || {}
+		let messageCount = newMessageSet.count || 0;
+		if (!messageCount) {
+			// Either someone has deleted all the messages, or this is a clean refresh?
+			// Add a single row just so at least 1 exists
+			if (trackingIds.size) {
+				// Empty the container (in case it had anything)
+				$tickerContainer.text();
+				// Reset the set
+				trackingIds = new Set();
+			}
+			// Add a single new row to reset
+			addRow();
+		}
+		else {
+			console.log(trackingIds);
+			for (let id of trackingIds) {
+				if (!(id in newMessageSet.messages)) {
+					let $target = $tickerContainer.find('#tickerMessage-' + id);
+					console.log(id, $target, $target.hasClass('new'));
+					if ($target.hasClass('new')) continue; // Hasn't been saved yet. We dont want to delete someones message before they have a chance to save it.
+					$target.closest('.row').remove();
+					trackingIds.delete(id);
+				}
+			}
+			console.log(newMessageSet.messages);
+			for (let id in newMessageSet.messages) {
+				if (!newMessageSet.messages.hasOwnProperty(id)) continue; // B/c JS is dumb...
+				const messageLine = newMessageSet.messages[id];
+				if (trackingIds.has(id)) {
+					updateRow(id, {'message': messageLine.message, 'icon': messageLine.icon, 'color': messageLine.color})
+				} else {
+					addRow({'message': messageLine.message, 'id': id, 'icon': messageLine.icon, 'color': messageLine.color}, false);
+					trackingIds.add(id);
+				}
+			}
+		}
+	});
 </script>
 </body>
 </html>

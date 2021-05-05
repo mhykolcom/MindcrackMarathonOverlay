@@ -61,8 +61,16 @@ body {
 	top: 0;
 }
 
-#suppBox .supp-message,
-#suppBox .supp-message .schedule-wrapper {
+#suppBox .supp-message {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+#suppBox .supp-message .schedule-wrapper,
+#suppBox .supp-message .ticker-line {
 	height: 100%;
 }
 
@@ -144,6 +152,32 @@ body {
 
 #suppBox .schedule #schedule-later:after {
 	background: var(--scheduleBG3);
+}
+
+#suppBox .ticker-line {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	/*padding-left: 90px;*/
+	/*font-size: 1.75em;*/
+	font-size: 1.5em;
+	background: #656565;
+	color: #fff;
+}
+
+#suppBox .ticker-icon {
+	position: absolute;
+	top: 18px;
+	left: 23px;
+	font-size: 1.4em;
+}
+
+#suppBox .ticker-message {
+	padding: 0 20px 0 90px;
 }
 
 .bottom-bar #suppBox {

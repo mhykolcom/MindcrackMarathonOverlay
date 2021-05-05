@@ -56,10 +56,9 @@
 		// A Replicant can be modified by modifying its `value`.
 		scheduleReplicant.value = {'now': now.value, 'next': upNext.value, 'later': later.value};
 
+		supplementalReplicant.value = supplementalReplicant.value || {};
+		let supplementals = supplementalReplicant.value
 		if (now.value && upNext.value && later.value) {
-			supplementalReplicant.value = supplementalReplicant.value || {};
-
-			let supplementals = supplementalReplicant.value
 			let element = `
 				<div class="schedule-wrapper">
 					<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
@@ -77,8 +76,10 @@
 				</div>
 			`;
 			supplementals['schedule'] = [element]
-			supplementalReplicant.value = supplementals;
+		} else {
+			delete supplementals['schedule'];
 		}
+		supplementalReplicant.value = supplementals;
 	};
 </script>
 </html>

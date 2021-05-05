@@ -49,7 +49,7 @@ function showSupplementBox() {
 	supplementalInterval = setInterval(rotateSupplement, supplementalSpeedEach);
 }
 
-async function rotateSupplement(firstRun = false, fadeSpeed = 1500) {
+function rotateSupplement(firstRun = false, fadeSpeed = 1500) {
 	if (supplementalCount === 0) {
 		// Stop the timer. There is nothing to show. No reason to run...
 		hideSupplementBox();
@@ -69,10 +69,19 @@ async function rotateSupplement(firstRun = false, fadeSpeed = 1500) {
 	}
 
 	// Hide old & show new
-	if (!firstRun) supplementalBox.find('> div.supp-message').fadeOut(fadeSpeed, () => supplementalBox.find('> div.supp-message').removeClass('shown'));
-	$(`#supp-${++currentSupplementalIndex}`).fadeIn(fadeSpeed)
-	await new Promise(res => setTimeout(res, 1000));
-	$(`#supp-${currentSupplementalIndex}`).addClass('shown')
+	supplementalBox.find('> div.supp-message.shown')
+		.addClass('hiding')
+		.fadeOut(fadeSpeed, () => supplementalBox
+			.find('> div.supp-message.hiding')
+			.removeClass('shown').removeClass('hiding'));
+
+	// Track current, because JS...
+	// BUG: (the actual issue: it doesnt track the last element,
+	//   for some reason I cant be bothered to figure out right now)
+	let shown = ++currentSupplementalIndex;
+	$(`#supp-${shown}`).fadeIn(fadeSpeed, () => {
+		$(`#supp-${shown}`).addClass('shown')
+	});
 
 	if (supplementalCount - 1 === currentSupplementalIndex) {
 		// Reset the index and increment counter
@@ -140,9 +149,9 @@ settingReplicant.on('change', (newData) => {
 	$('#section-container div.section').css('border-color', newData.barSeparatorColor || '#ffffff');
 
 	$('#section1Label').text(newData.section1Label || 'Time Left');
-	$('#section2Label').text(newData.section2Label || 'Time Left');
-	$('#section3Label').text(newData.section3Label || 'Time Left');
-	$('#section4Label').text(newData.section4Label || 'Time Left');
+	$('#section2Label').text(newData.section2Label || 'Current Total');
+	$('#section3Label').text(newData.section3Label || 'Current Goal');
+	$('#section4Label').text(newData.section4Label || 'Last Donation');
 
 	$('#section-container div#section-1').css('width', '' + (parseInt(newData.section1Width) || '220') + 'px');
 	$('#section-container div#section-2').css('width', '' + (parseInt(newData.section2Width) || '300') + 'px');
@@ -180,10 +189,10 @@ async function updateSupplements(supplementals) {
 		supplementalBox.text(''); // Clear it
 		for (const bundle in supplementals) {
 			// noinspection JSUnfilteredForInLoop
-			supplementals[bundle].forEach((supp) => {
+			supplementals[bundle].forEach(supp => {
 				// Add elements
 				let $element = $(supp);
-				let $element_container = $('<div id="supp-' + (supplementalCount++) + '" class="supp-message" style="display: none"></div>');
+				let $element_container = $('<div id="supp-' + (supplementalCount++) + '" class="supp-message supp-'+bundle+'" style="display: none"></div>');
 				$element_container.append($element);
 				supplementalBox.append($element_container);
 			});
