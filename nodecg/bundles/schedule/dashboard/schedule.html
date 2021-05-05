@@ -55,27 +55,30 @@
 	update.onclick = () => {
 		// A Replicant can be modified by modifying its `value`.
 		scheduleReplicant.value = {'now': now.value, 'next': upNext.value, 'later': later.value};
-		supplementalReplicant.value = supplementalReplicant.value || {};
 
-		let supplementals = supplementalReplicant.value
-		let element = `
-			<div class="schedule-wrapper">
-				<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
-				<div class="schedule">
-					<div id="schedule-now">
-						<div><span>Now: </span><span>${now.value}</span></div>
-					</div>
-					<div id="schedule-next">
-						<div><span>Next: </span><span>${upNext.value}</span></div>
-					</div>
-					<div id="schedule-later">
-						<div><span>Later: </span><span>${later.value}</span></div>
+		if (now.value && upNext.value && later.value) {
+			supplementalReplicant.value = supplementalReplicant.value || {};
+
+			let supplementals = supplementalReplicant.value
+			let element = `
+				<div class="schedule-wrapper">
+					<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
+					<div class="schedule">
+						<div id="schedule-now">
+							<div><span>Now: </span><span>${now.value}</span></div>
+						</div>
+						<div id="schedule-next">
+							<div><span>Next: </span><span>${upNext.value}</span></div>
+						</div>
+						<div id="schedule-later">
+							<div><span>Later: </span><span>${later.value}</span></div>
+						</div>
 					</div>
 				</div>
-			</div>
-		`;
-		supplementals['schedule'] = [element]
-		supplementalReplicant.value = supplementals;
+			`;
+			supplementals['schedule'] = [element]
+			supplementalReplicant.value = supplementals;
+		}
 	};
 </script>
 </html>
