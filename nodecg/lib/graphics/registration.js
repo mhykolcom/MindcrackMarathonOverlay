@@ -64,7 +64,7 @@ io.on('connection', socket => {
 		} else {
 			addRegistration({
 				...regRequest,
-				ipv4: socket.request.connection.remoteAddress,
+				ipv4: socket.handshake.headers['cf-connecting-ip'] || socket.handshake.headers['x-forwarded-for'] || socket.request.connection.remoteAddress,
 				socketId: socket.id,
 				singleInstance: Boolean(graphicManifest.singleInstance),
 				potentiallyOutOfDate: calcBundleGitMismatch(bundle, regRequest) ||
