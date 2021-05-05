@@ -3,33 +3,104 @@
 <head>
     <meta charset="UTF-8">
 	<style>
-		.monospace {
-			font-family: monospace;
+		a.nav-link {
+			color: white;
 		}
 	</style>
 </head>
 <body>
-	<h2>Idea/Purpose:</h2>
-
-	<div>
-		<p>Where marathon wide settings get stored.</p>
-		<ul>
-			<li>N3rds.care slug</li>
-			<li>ELU Participant ID</li>
-			<li>Twitter username(s)/hashtag(s) to follow<br />(for message display)</li>
-			<li>Something else, Im sure...</li>
-		</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-main-tab" data-toggle="tab" href="#nav-main" role="tab" aria-controls="nav-main" aria-selected="true">Main</a>
+					<a class="nav-item nav-link" id="nav-social-tab" data-toggle="tab" href="#nav-social" role="tab" aria-controls="nav-social" aria-selected="false">Social Media</a>
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="n3rdsSlug">n3rds.care Slug:</label>
+							<input class="form-control" id="n3rdsSlug" type="text"/>
+							<small class="form-text">
+								Where the slug is: https://donate.n3rds.care/event/<strong>XXXXXXX</strong>/
+							</small>
+						</div>
+					</div>
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="eluID">Extra Life Participant ID:</label>
+							<input class="form-control" id="eluID" type="text"/>
+							<small class="form-text">
+								Where the ID is: https://www.extra-life.org/index.cfm?fuseaction=donorDrive.participant&participantID=<strong>XXXXXX</strong>
+							</small>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="nav-social" role="tabpanel" aria-labelledby="nav-social-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="twitterAccounts">Twitter Accounts to Track:</label>
+							<input class="form-control" id="twitterAccounts" type="text"/>
+							<small class="form-text">
+								Comma Separated list
+							</small>
+						</div>
+					</div>
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="twitterTags">Twitter Tags to Track:</label>
+							<input class="form-control" id="twitterTags" type="text"/>
+							<small class="form-text">
+								Comma Separated list
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
+	<hr/>
 
-	<p>To edit: "<span id="path" class="monospace"></span>"</p>
+	<div class="row">
+		<div class="col">
+			<button class="btn btn-primary" id="update">Update</button>
+		</div>
+	</div>
+</div>
 
-	<script>
-		document.getElementById('path').textContent = `nodecg${window.location.pathname}`;
 
-		// You can access the NodeCG api anytime from the `window.nodecg` object
-		// Or just `nodecg` for short. Like this!:
-		// nodecg.log.info('Here\'s an example of using NodeCG\'s logging API!');
-	</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
+<script>
+	const settingReplicant = nodecg.Replicant('global_settings');
+	const update = $('#update');
+
+	let n3rdsSlug = $('#n3rdsSlug');
+	let eluID = $('#eluID');
+	let twitterAccounts = $('#twitterAccounts');
+	let twitterTags = $('#twitterTags');
+
+	settingReplicant.on('change', (newData) => {
+		newData = newData || {}
+
+		n3rdsSlug.val(newData.n3rdsSlug || '');
+		eluID.val(newData.eluID || '');
+		twitterAccounts.val(newData.twitterAccounts || '');
+		twitterTags.val(newData.twitterTags || '');
+	});
+
+	update.on('click', () => {
+		settingReplicant.value = {
+			n3rdsSlug: n3rdsSlug.val(),
+			eluID: eluID.val(),
+			twitterAccounts: twitterAccounts.val(),
+			twitterTags: twitterTags.val(),
+		}
+	});
+</script>
 </body>
 </html>
