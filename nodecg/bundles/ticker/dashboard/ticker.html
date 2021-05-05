@@ -7,6 +7,12 @@
 	<link href="css/icon-picker.min.css" type="text/css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/fa41cb755f.js" crossorigin="anonymous"></script>
 <!--	<script src="https://kit.fontawesome.com/7f875991c8.js" data-auto-replace-svg="nest" crossorigin="anonymous"></script>-->
+	<style>
+		.icp i {
+			text-align: center;
+			width: 1.25em;
+		}
+	</style>
 </head>
 <body>
 <div class="container">
@@ -111,8 +117,8 @@
 			if (setup.message && (typeof setup.message == 'string')) clone.find('.ticker-message').val(setup.message);
 			if (setup.icon && (typeof setup.icon == 'string')) {
 				clone.find('.ticker-icon').val(setup.icon);
-				clone.find('.icp').data('selected', setup.icon);
-				clone.find('.icp i').attr('class', `fa-fw iconpicker-component ${setup.icon}`);
+				clone.find('.icp').attr('data-selected', setup.icon);
+				clone.find('.icp i').attr('class', `fa-fw ${setup.icon}`);
 			}
 			if (setup.color && (typeof setup.color == 'string')) {
 				clone.find('.ticker-color').val(setup.color);
