@@ -200,17 +200,14 @@
 			addRow();
 		}
 		else {
-			console.log(trackingIds);
 			for (let id of trackingIds) {
 				if (!(id in newMessageSet.messages)) {
 					let $target = $tickerContainer.find('#tickerMessage-' + id);
-					console.log(id, $target, $target.hasClass('new'));
 					if ($target.hasClass('new')) continue; // Hasn't been saved yet. We dont want to delete someones message before they have a chance to save it.
 					$target.closest('.row').remove();
 					trackingIds.delete(id);
 				}
 			}
-			console.log(newMessageSet.messages);
 			for (let id in newMessageSet.messages) {
 				if (!newMessageSet.messages.hasOwnProperty(id)) continue; // B/c JS is dumb...
 				const messageLine = newMessageSet.messages[id];
