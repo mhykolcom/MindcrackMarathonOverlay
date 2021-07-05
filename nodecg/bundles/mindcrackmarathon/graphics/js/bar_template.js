@@ -21,18 +21,22 @@ const bar_content=`
 				<div id="section-container">
 					<div id="section-1" class="section">
 						<div id="section1Label" class="section-label">{time left}</div>
+						<div id="section1Data" class="section-data">{data1}</div>
 					</div>
 
 					<div id="section-2" class="section">
 						<div id="section2Label" class="section-label">{current total}</div>
+						<div id="section2Data" class="section-data">{data2}</div>
 					</div>
 
 					<div id="section-3" class="section">
 						<div id="section3Label" class="section-label">{current goal}</div>
+						<div id="section3Data" class="section-data">{data3}</div>
 					</div>
 
 					<div id="section-4" class="section">
 						<div id="section4Label" class="section-label">{last donation}</div>
+						<div id="section4Data" class="section-data">{data4}</div>
 					</div>
 				</div>
 			</div>

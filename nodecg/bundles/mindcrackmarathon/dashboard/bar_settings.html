@@ -7,6 +7,20 @@
 		a.nav-link {
 			color: white;
 		}
+		.section-divider {
+			display: flex;
+			align-items: center;
+			margin: 2em -1em 0.2em;
+		}
+
+		.section-divider:before,
+		.section-divider:after {
+			content: "";
+			flex: 1;
+			height: 1px;
+			margin: 0 1em;
+			background: #fff;
+		}
 	</style>
 </head>
 <body>
@@ -64,49 +78,140 @@
 
 				<!-- Sections -->
 				<div class="tab-pane fade" id="nav-section" role="tabpanel" aria-labelledby="nav-section-tab">
-					<div class="form-row mt-2">
+					<div class="form-row mt-2" style="margin-bottom: -30px;">
 						<div class="form-group col-12">
-							<div class="form-text text-center">The total width defined here must not pass 1320</div>
+							<div class="form-text text-center">The total width defined here <strong style="text-decoration: underline">must not exceed a total of 1320</strong>.<br />Clear the Label and Data fields to remove a section</div>
+						</div>
+					</div>
+
+					<div class="section-divider">Section 1</div>
+					<div class="form-row">
+						<div class="form-group col-5">
+							<label class="col-form-label" for="section1Label">Label:</label>
+							<input class="form-control" id="section1Label" type="text"/>
+						</div>
+						<div class="form-group col-7">
+							<label class="col-form-label" for="section1Data">Data:</label>
+							<input class="form-control" id="section1Data" type="text"/>
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-6 offset-2">
-							<label class="col-form-label" for="section1Label">Section 1 Label:</label>
-							<input class="form-control" id="section1Label" type="text"/>
-						</div>
-						<div class="form-group col-2">
+						<div class="form-group col-4">
 							<label class="col-form-label" for="section1Width">Width:</label>
 							<input class="form-control" id="section1Width" type="text"/>
 						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section1Fontsize">Data Font Size:</label>
+							<input class="form-control" id="section1Fontsize" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section1Color">Color:</label>
+							<input class="form-control" id="section1Color" type="color" placeholder="#ffffff"/>
+						</div>
 					</div>
+
+					<div class="section-divider">Section 2</div>
 					<div class="form-row">
-						<div class="form-group col-6 offset-2">
-							<label class="col-form-label" for="section2Label">Section 2 Label:</label>
+						<div class="form-group col-5">
+							<label class="col-form-label" for="section2Label">Label:</label>
 							<input class="form-control" id="section2Label" type="text"/>
 						</div>
-						<div class="form-group col-2">
+						<div class="form-group col-7">
+							<label class="col-form-label" for="section2Data">Data:</label>
+							<input class="form-control" id="section2Data" type="text"/>
+						</div>
+
+					</div>
+					<div class="form-row">
+						<div class="form-group col-4">
 							<label class="col-form-label" for="section2Width">Width:</label>
 							<input class="form-control" id="section2Width" type="text"/>
 						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section2Fontsize">Data Font Size:</label>
+							<input class="form-control" id="section2Fontsize" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section2Color">Color:</label>
+							<input class="form-control" id="section2Color" type="color"/>
+						</div>
 					</div>
+
+					<div class="section-divider">Section 3</div>
 					<div class="form-row">
-						<div class="form-group col-6 offset-2">
-							<label class="col-form-label" for="section3Label">Section 3 Label:</label>
+						<div class="form-group col-5">
+							<label class="col-form-label" for="section3Label">Label:</label>
 							<input class="form-control" id="section3Label" type="text"/>
 						</div>
-						<div class="form-group col-2">
+						<div class="form-group col-7">
+							<label class="col-form-label" for="section3Data">Data:</label>
+							<input class="form-control" id="section3Data" type="text"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-4">
 							<label class="col-form-label" for="section3Width">Width:</label>
 							<input class="form-control" id="section3Width" type="text"/>
 						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section3Fontsize">Data Font Size:</label>
+							<input class="form-control" id="section3Fontsize" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section3Color">Color:</label>
+							<input class="form-control" id="section3Color" type="color" placeholder="#ffffff"/>
+						</div>
 					</div>
+
+					<div class="section-divider">Section 4</div>
 					<div class="form-row">
-						<div class="form-group col-6 offset-2">
-							<label class="col-form-label" for="section4Label">Section 4 Label:</label>
+						<div class="form-group col-5">
+							<label class="col-form-label" for="section4Label">Label:</label>
 							<input class="form-control" id="section4Label" type="text"/>
 						</div>
-						<div class="form-group col-2">
+						<div class="form-group col-7">
+							<label class="col-form-label" for="section4Data">Data:</label>
+							<input class="form-control" id="section4Data" type="text"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-4">
 							<label class="col-form-label" for="section4Width">Width:</label>
 							<input class="form-control" id="section4Width" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section4Fontsize">Data Font Size:</label>
+							<input class="form-control" id="section4Fontsize" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section4Color">Color:</label>
+							<input class="form-control" id="section4Color" type="color" placeholder="#ffffff"/>
+						</div>
+					</div>
+
+					<div class="section-divider" style="display: none">Section 5</div>
+					<div class="form-row" style="display: none">
+						<div class="form-group col-5">
+							<label class="col-form-label" for="section5Label">Label:</label>
+							<input class="form-control" id="section5Label" type="text"/>
+						</div>
+						<div class="form-group col-7">
+							<label class="col-form-label" for="section5Data">Data:</label>
+							<input class="form-control" id="section5Data" type="text"/>
+						</div>
+					</div>
+					<div class="form-row" style="display: none">
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section5Width">Width:</label>
+							<input class="form-control" id="section5Width" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section5Fontsize">Data Font Size:</label>
+							<input class="form-control" id="section5Fontsize" type="text"/>
+						</div>
+						<div class="form-group col-4">
+							<label class="col-form-label" for="section5Color">Color:</label>
+							<input class="form-control" id="section5Color" type="color" placeholder="#ffffff"/>
 						</div>
 					</div>
 				</div>
@@ -197,12 +302,29 @@
 
 	const section1Label = $('#section1Label');
 	const section1Width = $('#section1Width');
+	const section1Data = $('#section1Data');
+	const section1Size = $('#section1Fontsize');
+	const section1Color = $('#section1Color');
 	const section2Label = $('#section2Label');
 	const section2Width = $('#section2Width');
+	const section2Data = $('#section2Data');
+	const section2Size = $('#section2Fontsize');
+	const section2Color = $('#section2Color');
 	const section3Label = $('#section3Label');
 	const section3Width = $('#section3Width');
+	const section3Data = $('#section3Data');
+	const section3Size = $('#section3Fontsize');
+	const section3Color = $('#section3Color');
 	const section4Label = $('#section4Label');
 	const section4Width = $('#section4Width');
+	const section4Data = $('#section4Data');
+	const section4Size = $('#section4Fontsize');
+	const section4Color = $('#section4Color');
+	const section5Label = $('#section5Label');
+	const section5Width = $('#section5Width');
+	const section5Data = $('#section5Data');
+	const section5Size = $('#section5Fontsize');
+	const section5Color = $('#section5Color');
 
 	const donationBarFillColor = $('#donationBarFillColor');
 	const donationBarOffColor = $('#donationBarOffColor');
@@ -238,10 +360,27 @@
 		section2Label.val(newData.section2Label || 'Current Total');
 		section3Label.val(newData.section3Label || 'Current Goal');
 		section4Label.val(newData.section4Label || 'Last Donation');
+		section5Label.val(newData.section5Label || '');
 		section1Width.val(newData.section1Width || '220');
 		section2Width.val(newData.section2Width || '300');
 		section3Width.val(newData.section3Width || '300');
 		section4Width.val(newData.section4Width || '380');
+		section5Width.val(newData.section5Width || '0');
+		section1Data.val(newData.section1Data || '{countdown1}');
+		section2Data.val(newData.section2Data || '{current_total}');
+		section3Data.val(newData.section3Data || '{current_goal}');
+		section4Data.val(newData.section4Data || '{last_donation}');
+		section5Data.val(newData.section5Data || '');
+		section1Size.val(newData.section1Size || '1em');
+		section2Size.val(newData.section2Size || '1em');
+		section3Size.val(newData.section3Size || '1em');
+		section4Size.val(newData.section4Size || '1em');
+		section5Size.val(newData.section5Size || '1em');
+		section1Color.val(newData.section1Color || '#ffffff');
+		section2Color.val(newData.section2Color || '#ffffff');
+		section3Color.val(newData.section3Color || '#ffffff');
+		section4Color.val(newData.section4Color || '#ffffff');
+		section5Color.val(newData.section5Color || '#ffffff');
 
 		donationBarFillColor.val(newData.donationBarFillColor || '#8ed717');
 		donationBarOffColor.val(newData.donationBarOffColor || '#5f780d');
@@ -280,10 +419,27 @@
 			section2Label: section2Label.val().trim(),
 			section3Label: section3Label.val().trim(),
 			section4Label: section4Label.val().trim(),
+			section5Label: section5Label.val().trim(),
 			section1Width: parseInt(section1Width.val()),
 			section2Width: parseInt(section2Width.val()),
 			section3Width: parseInt(section3Width.val()),
 			section4Width: parseInt(section4Width.val()),
+			section5Width: parseInt(section5Width.val()),
+			section1Data: section1Data.val().trim(),
+			section2Data: section2Data.val().trim(),
+			section3Data: section3Data.val().trim(),
+			section4Data: section4Data.val().trim(),
+			section5Data: section5Data.val().trim(),
+			section1Size: section1Size.val().trim(),
+			section2Size: section2Size.val().trim(),
+			section3Size: section3Size.val().trim(),
+			section4Size: section4Size.val().trim(),
+			section5Size: section5Size.val().trim(),
+			section1Color: section1Color.val().trim(),
+			section2Color: section2Color.val().trim(),
+			section3Color: section3Color.val().trim(),
+			section4Color: section4Color.val().trim(),
+			section5Color: section5Color.val().trim(),
 
 			// Donations
 			donationBarFillColor: donationBarFillColor.val(),

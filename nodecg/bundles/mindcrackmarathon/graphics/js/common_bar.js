@@ -133,6 +133,40 @@ settingReplicant.on('change', (newData) => {
 	$('#section-container div#section-3').css('width', '' + (parseInt(newData.section3Width) || '300') + 'px');
 	$('#section-container div#section-4').css('width', '' + (parseInt(newData.section4Width) || '380') + 'px');
 
+	let sectionDataReplacements = {
+		bar_countdown: '--settings countdown datetime--',
+		bar_timer: '--settings countdown timer--',
+		countdown1: '--countdown 1--',
+		countdown2: '--countdown 2--',
+		countdown3: '--countdown 3--',
+		countdown4: '--countdown 4--',
+		countdown5: '--countdown 5--',
+		current_total: '--current total--',
+		current_goal: '--current goal--',
+		next_incentive: '--next incentive--',
+		last_donation: '--last donation--',
+		schedule_now: '--schedule: now--',
+		schedule_next: '--schedule: next--',
+		schedule_later: '--schedule: later--',
+	};
+
+	$('#section-container div#section1Data')
+		.text(prepOutput(newData.section1Data, sectionDataReplacements))
+		.css('color', newData.section1Color)
+		.css('font-size', newData.section1Size);
+	$('#section-container div#section2Data')
+		.text(prepOutput(newData.section2Data, sectionDataReplacements))
+		.css('color', newData.section2Color)
+		.css('font-size', newData.section2Size);
+	$('#section-container div#section3Data')
+		.text(prepOutput(newData.section3Data, sectionDataReplacements))
+		.css('color', newData.section3Color)
+		.css('font-size', newData.section3Size);
+	$('#section-container div#section4Data')
+		.text(prepOutput(newData.section4Data, sectionDataReplacements))
+		.css('color', newData.section4Color)
+		.css('font-size', newData.section4Size);
+
 	// Donation bar
 	donationBarText = newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far';
 	donationBarStyle = {

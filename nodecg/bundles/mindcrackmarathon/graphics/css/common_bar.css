@@ -34,6 +34,7 @@ body {
 
 body.full {
 	height: 1080px;
+	position: relative;
 }
 
 #overlay-wrapper {
@@ -332,3 +333,10 @@ img#mc_logo {
 #section-container div.section-label::after {content: ':';}
 #section-container div#section-1 {width: 220px;}
 #section-container div#section-4 {width: 380px;}
+
+.section-data {
+	position: absolute;
+	top: 21px;
+	color: white;
+	font-size: 1.1em;
+}
