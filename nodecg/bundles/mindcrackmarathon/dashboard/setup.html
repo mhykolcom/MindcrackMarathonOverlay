@@ -15,6 +15,7 @@
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
 					<a class="nav-item nav-link active" id="nav-main-tab" data-toggle="tab" href="#nav-main" role="tab" aria-controls="nav-main" aria-selected="true">Main</a>
+					<a class="nav-item nav-link" id="nav-countdown-tab" data-toggle="tab" href="#nav-countdown" role="tab" aria-controls="nav-main" aria-selected="true">Countdown</a>
 					<a class="nav-item nav-link" id="nav-social-tab" data-toggle="tab" href="#nav-social" role="tab" aria-controls="nav-social" aria-selected="false">Social Media</a>
 				</div>
 			</nav>
@@ -35,6 +36,23 @@
 							<input class="form-control" id="eluID" type="text"/>
 							<small class="form-text">
 								Where the ID is: https://www.extra-life.org/index.cfm?fuseaction=donorDrive.participant&participantID=<strong>XXXXXX</strong>
+							</small>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade show" id="nav-countdown" role="tabpanel" aria-labelledby="nav-main-tab">
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="countdown_datetime">Countdown Date/Time (local):</label>
+							<input class="form-control" id="countdown_datetime" type="datetime-local" />
+						</div>
+					</div>
+					<div class="form-row mt-2">
+						<div class="form-group col-12">
+							<label class="col-form-label" for="countdown_timer">Countdown Timer:</label>
+							<input class="form-control" id="countdown_timer" type="text" placeholder="000:00:00" />
+							<small class="form-text">
+								Format of HHH:MM:SS
 							</small>
 						</div>
 					</div>
@@ -83,6 +101,8 @@
 	let eluID = $('#eluID');
 	let twitterAccounts = $('#twitterAccounts');
 	let twitterTags = $('#twitterTags');
+	let countdownDatetime = $('#countdown_datetime');
+	let countdownTimer = $('#countdown_timer');
 
 	settingReplicant.on('change', (newData) => {
 		newData = newData || {}
@@ -91,6 +111,8 @@
 		eluID.val(newData.eluID || '');
 		twitterAccounts.val(newData.twitterAccounts || '');
 		twitterTags.val(newData.twitterTags || '');
+		countdownDatetime.val(newData.countdownDatetime || '');
+		countdownTimer.val(newData.countdownTimer || '');
 	});
 
 	update.on('click', () => {
@@ -99,6 +121,8 @@
 			eluID: eluID.val(),
 			twitterAccounts: twitterAccounts.val(),
 			twitterTags: twitterTags.val(),
+			countdownDatetime: countdownDatetime.val(),
+			countdownTimer: countdownTimer.val(),
 		}
 	});
 </script>

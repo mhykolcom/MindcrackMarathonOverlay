@@ -36,7 +36,9 @@ const content=`
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/replicant_definitions.js"></script>
 <script src="js/common_bar.js"></script>
+<script src="js/supplemental_bar.js"></script>
 `;
 
 document.body.innerHTML = content;
@@ -77,5 +79,7 @@ async function load_scripts(urls) {
 		'integrity': 'sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==',
 		'crossOrigin': 'anonymous'
 	},
-	'js/common_bar.js': {}
+	'js/replicant_definitions.js': {},
+	'js/common_bar.js': {},
+	'js/supplemental_bar.js': {}
 }))();
