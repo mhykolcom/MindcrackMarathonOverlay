@@ -174,7 +174,11 @@
 
 	<div class="row">
 		<div class="col">
-			<button class="btn btn-primary" id="updateLabels">Update</button>
+			<div class="btn-group">
+				<button class="btn btn-primary" id="updateLabels">Update</button>
+				<button class="btn btn-secondary" id="forceRotation">Force (Re)Start Rotation</button>
+				<button class="btn btn-secondary" id="forceNextRotation">Force Next Rotation</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -213,6 +217,8 @@
 	const suppRotations = $('#suppRotations');
 
 	const update = $('#updateLabels');
+	const forceRotation = $('#forceRotation');
+	const forceNextRotation = $('#forceNextRotation');
 
 	const settingReplicant = nodecg.Replicant('main_bar_settings');
 
@@ -291,6 +297,14 @@
 			'suppShowEach': suppShowEachValue,
 			'suppRotations': parseInt(suppRotations.val()),
 		}
+	});
+
+	forceRotation.on('click', () => {
+		nodecg.sendMessage('supplementalControl', {'action': 'forceStartRotation'});
+	});
+
+	forceNextRotation.on('click', () => {
+		nodecg.sendMessage('supplementalControl', {'action': 'forceNextRotation'});
 	});
 </script>
 </body>

@@ -187,14 +187,21 @@ async function updateSupplements(supplementals) {
 
 		supplementalCount = 0;
 		supplementalBox.text(''); // Clear it
+
+		// Always add schedule first
+		if ('schedule' in supplementals) {
+			addSuppMessage(supplementals['schedule'][0], 'schedule');
+		}
+
 		for (const bundle in supplementals) {
-			// noinspection JSUnfilteredForInLoop
+			if (!supplementals.hasOwnProperty(bundle)) continue;
+
+			// Skip schedule (already added)
+			if (bundle === 'schedule') continue;
+
+			// Add each item in bundle supplemental to suppBox
 			supplementals[bundle].forEach(supp => {
-				// Add elements
-				let $element = $(supp);
-				let $element_container = $('<div id="supp-' + (supplementalCount++) + '" class="supp-message supp-'+bundle+'" style="display: none"></div>');
-				$element_container.append($element);
-				supplementalBox.append($element_container);
+				addSuppMessage(supp, bundle);
 			});
 		}
 
@@ -202,6 +209,43 @@ async function updateSupplements(supplementals) {
 		if (supplementalInterval) showSupplementBox();
 		else supplementalNextTimeout = setTimeout(showSupplementBox, supplementalSpeedBetween);
 	}
+
+	function addSuppMessage(supp, bundle) {
+		// Add elements
+		let $element = $(supp);
+		let $element_container = $('<div id="supp-' + (supplementalCount++) + '" class="supp-message supp-' + bundle + '" style="display: none"></div>');
+		$element_container.append($element);
+		supplementalBox.append($element_container);
+	}
 }
 
 supplementalReplicant.on('change', updateSupplements);
+
+
+const FORCE_START_SUPPLEMENTAL_ROTATION = 'forceStartRotation';
+const FORCE_NEXT_SUPPLEMENTAL_ROTATION = 'forceNextRotation';
+async function doSupplementalControl(data) {
+	// console.log('control: ', data)
+
+	if (!data.action) return nodecg.log.error('Requested supplemental control, but no data/action was specified', data);
+	if (![FORCE_START_SUPPLEMENTAL_ROTATION, FORCE_NEXT_SUPPLEMENTAL_ROTATION].includes(data.action)) return nodecg.log.error('Unknown action', data)
+
+	const action = data.action;
+
+	if (action === FORCE_START_SUPPLEMENTAL_ROTATION) {
+		// Stop the box
+		hideSupplementBox();
+		clearInterval(supplementalInterval);
+		clearTimeout(supplementalNextTimeout);
+
+		// Sleep for a sec to give the box time to disappear
+		await new Promise(res => setTimeout(res, 1000));
+
+		// (Re)start
+		showSupplementBox();
+	} else if (action === FORCE_NEXT_SUPPLEMENTAL_ROTATION) {
+		rotateSupplement();
+	}
+}
+
+nodecg.listenFor('supplementalControl', doSupplementalControl)

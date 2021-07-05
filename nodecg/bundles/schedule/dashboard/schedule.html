@@ -58,27 +58,45 @@
 
 		supplementalReplicant.value = supplementalReplicant.value || {};
 		let supplementals = supplementalReplicant.value
-		if (now.value && upNext.value && later.value) {
+		if (!now.value) {
+			delete supplementals['schedule'];
+		} else {
+			let scheduleCount = 1;
 			let element = `
-				<div class="schedule-wrapper">
-					<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
-					<div class="schedule">
-						<div id="schedule-now">
-							<div><span>Now: </span><span>${now.value}</span></div>
-						</div>
-						<div id="schedule-next">
-							<div><span>Next: </span><span>${upNext.value}</span></div>
-						</div>
+				<div id="schedule-now">
+					<div><span>Now: </span><span>${now.value}</span></div>
+				</div>
+			`;
+
+			if (upNext.value) {
+				scheduleCount++;
+				element += `
+					<div id="schedule-next">
+						<div><span>Next: </span><span>${upNext.value}</span></div>
+					</div>
+				`;
+
+				if (later.value) {
+					scheduleCount++;
+					element += `
 						<div id="schedule-later">
 							<div><span>Later: </span><span>${later.value}</span></div>
 						</div>
+					`;
+				}
+			}
+
+			element = `
+				<div class="schedule-wrapper count-${scheduleCount}">
+					<div class="schedule-icon"><i class="fad fa-calendar-alt"></i></div>
+					<div class="schedule">
+						${element}
 					</div>
 				</div>
-			`;
+			`
 			supplementals['schedule'] = [element]
-		} else {
-			delete supplementals['schedule'];
 		}
+
 		supplementalReplicant.value = supplementals;
 	};
 </script>
