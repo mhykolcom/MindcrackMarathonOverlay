@@ -58,6 +58,16 @@
         "height": 167
       },
       {
+        "file": "full_top.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "full_bottom.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
         "file": "lower3rd.html",
         "width": 1920,
         "height": 1080
