@@ -3,7 +3,14 @@ const content=`
 <div id="suppBox" class="hidden"></div>
 <div id="overlay-wrapper">
 	<div id="main-bar">
-		<div id="goal-bar"></div>
+		<!-- off bar text color || base bg color || font-size || "border" w/ same color as bar -->
+		<div id="goal-bar">
+			<!-- Progress bar: on bar text color || bar bg color -->
+			<div id="goal-bar-progress" style="width: 10%; color: #ffffff; background-color: #000099;">
+				<div id="goal-progress-text" style="">This is just some text that will exist here...</div>
+			</div>
+			<div id="goal-text">This is just some text that will exist here...</div>
+		</div>
 		<div id="info-bar-wrapper">
 			<img id="mc_logo" src="" alt="Mindcrack logo"/>
 			<div id="info-bar">
@@ -35,10 +42,11 @@ const content=`
 	<div id="sponsor-box"></div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script src="/bundles/utility/js/utilities.js"></script>
 <script src="js/replicant_definitions.js"></script>
 <script src="js/common_bar.js"></script>
-<script src="js/supplemental_bar.js"></script>
+<script src="js/supplemental_bar.js"></script>-->
 `;
 
 document.body.innerHTML = content;
@@ -79,6 +87,7 @@ async function load_scripts(urls) {
 		'integrity': 'sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==',
 		'crossOrigin': 'anonymous'
 	},
+	'/bundles/utility/js/utilities.js': {},
 	'js/replicant_definitions.js': {},
 	'js/common_bar.js': {},
 	'js/supplemental_bar.js': {}

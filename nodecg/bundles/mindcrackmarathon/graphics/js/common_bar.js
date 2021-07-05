@@ -5,6 +5,16 @@ let sponsorInterval = 0;
 let sponsorCount = 0;
 let currentSponsorIndex = -1;
 
+const goalBar = document.getElementById("goal-bar");
+const goalBarProgress = document.getElementById("goal-bar-progress");
+const goalProgressText = document.getElementById("goal-progress-text");
+const goalText = document.getElementById("goal-text");
+let donationBarText = '';
+let donationBarStyle = {
+	text: {fill: '', off: ''},
+	bar: {fill: '', off: ''}
+};
+
 function rotateSponsors() {
 	if (sponsorCount === 0) return; // No sponsors. No need to run rotate anything
 	if (sponsorCount === 1 && currentSponsorIndex === 0) return; // Sponsor already set. No need to rotate anything;
@@ -15,6 +25,54 @@ function rotateSponsors() {
 
 	if (sponsorCount === 1 && currentSponsorIndex === 0) return; // Just to stop the rotations
 	if (sponsorCount - 1 === currentSponsorIndex) currentSponsorIndex = -1; // Reset
+}
+
+function updateDonationBar(current, goal) {
+	current = parseFloat(current)
+	goal = parseFloat(goal)
+
+	if (current <= 0 && goal <= 0) {
+		goalBar.setAttribute('style', 'display: none;')
+		console.log('No goal set')
+		nodecg.log.warn('No goal set')
+		return;
+	}
+
+	let percent = (current / goal) * 100;
+	if (percent >= 100) {
+		percent = 100;
+	}
+
+	let width = 0;
+	if (current > 0) {
+		width = Math.ceil(percent)
+		if (width >= 100) {
+			if (current < goal) width = 99;
+			else width = 100;
+		}
+	}
+
+	let goal_bar_style = '';
+	goal_bar_style += `color: ${donationBarStyle.text.off};`;
+	goal_bar_style += `background-color: ${donationBarStyle.bar.off};`;
+
+	let goal_bar_progress_style = '';
+	goal_bar_progress_style += `width: ${width}%;`;
+	goal_bar_progress_style += `color: ${donationBarStyle.text.fill};`;
+	goal_bar_progress_style += `background-color: ${donationBarStyle.bar.fill};`;
+
+	goalBar.setAttribute('style', goal_bar_style)
+	goalBarProgress.setAttribute('style', goal_bar_progress_style)
+
+	let barText = donationBarText;
+	barText = prepOutput(barText, {
+		current: '$'+current,
+		goal: '$'+goal,
+		percent: percent.toFixed(2)+'%',
+	});
+
+	goalText.innerText = barText;
+	goalProgressText.innerText = barText;
 }
 
 
@@ -38,6 +96,7 @@ sponsorReplicant.on('change', (newSponsors) => {
 settingReplicant.on('change', (newData) => {
 	newData = newData || {}
 
+	// Logo
 	let extraLife = newData.extraLife === undefined ? true : newData.extraLife;
 	if (extraLife) {
 		document.querySelector('#mc_logo').src = 'images/ExtraLife_MindcrackLogoW.png';
@@ -54,10 +113,12 @@ settingReplicant.on('change', (newData) => {
 		$('#marathon_logo img').hide();
 	}
 
+	// Sponsors
 	clearInterval(sponsorInterval);
 	sponsorRotation = parseInt(newData.sponsorRotation || '60000');
 	sponsorInterval = setInterval(rotateSponsors, sponsorRotation);
 
+	// Section control and formatting
 	$('#overlay-wrapper').css('background', newData.mainBarColor || '#19181a');
 	$('#section-container div.section-label').css('color', newData.mainTextColor || '#ffffff');
 	$('#section-container div.section').css('border-color', newData.barSeparatorColor || '#ffffff');
@@ -72,9 +133,21 @@ settingReplicant.on('change', (newData) => {
 	$('#section-container div#section-3').css('width', '' + (parseInt(newData.section3Width) || '300') + 'px');
 	$('#section-container div#section-4').css('width', '' + (parseInt(newData.section4Width) || '380') + 'px');
 
-	let donationBarFillColor = newData.donationBarFillColor || '#8ed717';
-	let donationBarOffColor = newData.donationBarOffColor || '#5f780d';
-	let donationBarTextFillColor = newData.donationBarTextFillColor || '#000000';
-	let donationBarTextOffColor = newData.donationBarTextOffColor || '#ffffff';
-	let donationTextFormat = newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far';
+	// Donation bar
+	donationBarText = newData.donationTextFormat || 'Raised: {current}/{goal} ({percent}) so far';
+	donationBarStyle = {
+		text: {
+			fill: (newData.donationBarTextFillColor || '#000000'),
+			off: (newData.donationBarTextOffColor || '#ffffff')
+		},
+		bar: {
+			fill: (newData.donationBarFillColor || '#8ed717'),
+			off: (newData.donationBarOffColor || '#5f780d')
+		}
+	};
+
+	// Temp vars until it gets hooked up to API
+	let current=237.81;
+	let goal=500.00;
+	updateDonationBar(current, goal);
 });

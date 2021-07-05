@@ -8,7 +8,14 @@
 <body>
 <div id="overlay-wrapper">
 	<div id="main-bar">
-		<div id="goal-bar"></div>
+		<!-- off bar text color || base bg color || font-size || "border" w/ same color as bar -->
+		<div id="goal-bar">
+			<!-- Progress bar: on bar text color || bar bg color -->
+			<div id="goal-bar-progress" style="width: 10%; color: #ffffff; background-color: #000099;">
+				<div id="goal-progress-text" style="">This is just some text that will exist here...</div>
+			</div>
+			<div id="goal-text">This is just some text that will exist here...</div>
+		</div>
 		<div id="info-bar-wrapper">
 			<img id="mc_logo" src="" alt="Mindcrack logo"/>
 			<div id="info-bar">
@@ -41,6 +48,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/bundles/utility/js/utilities.js"></script>
 <script src="js/replicant_definitions.js"></script>
 <script src="js/common_bar.js"></script>
 </body>

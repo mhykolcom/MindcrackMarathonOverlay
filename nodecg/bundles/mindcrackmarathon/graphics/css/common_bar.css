@@ -52,6 +52,39 @@ body.full {
 	bottom: 0;
 }
 
+#goal-bar {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+}
+
+#goal-bar-progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	overflow: hidden;
+	white-space: nowrap;
+	transition: width .6s ease;
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+#goal-progress-text {
+	position: absolute;
+	width: 1711px;
+}
+
+#goal-text {
+	position: absolute;
+	width: 1711px;
+}
+
+
 #suppBox {
 	position: absolute;
 	top: 97px;
